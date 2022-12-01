@@ -1,10 +1,14 @@
 import { AppRoute } from './route/AppRoute';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
+import { themeBlue } from './themes/themeBlue';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <AppRoute />
+      <ThemeProvider theme={themeBlue}>
+        <AppRoute />
+      </ThemeProvider>
     </BrowserRouter>
   );
 };
