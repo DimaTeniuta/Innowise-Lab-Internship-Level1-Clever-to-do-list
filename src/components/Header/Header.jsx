@@ -2,12 +2,72 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/system/Container';
 import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { NavLink } from 'react-router-dom';
+import { RoutePath } from '../../utils/routeVariables';
 
 export const Header = () => {
   return (
     <AppBar>
-      <Container>
-        <Toolbar disableGutters={true}></Toolbar>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters={true} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box>
+            <Button
+              component={NavLink}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'secondary.main',
+                p: 1,
+                fontSize: 14,
+                textDecoration: 'none',
+                '&.active': {
+                  color: 'secondary.contrastText',
+                },
+              }}
+              to={RoutePath.HOME}
+            >
+              T.Mamagement
+            </Button>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
+            <Button
+              component={NavLink}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'secondary.main',
+                p: 1,
+                fontSize: 14,
+                textDecoration: 'none',
+                '&.active': {
+                  color: 'secondary.contrastText',
+                },
+              }}
+              to={RoutePath.SIGN_IN}
+            >
+              SignIn
+            </Button>
+            <Button
+              component={NavLink}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'secondary.main',
+                p: 1,
+                fontSize: 14,
+                textDecoration: 'none',
+                '&.active': {
+                  color: 'secondary.contrastText',
+                },
+              }}
+              to={RoutePath.SIGN_OUT}
+            >
+              SignOut
+            </Button>
+          </Box>
+        </Toolbar>
       </Container>
     </AppBar>
   );
