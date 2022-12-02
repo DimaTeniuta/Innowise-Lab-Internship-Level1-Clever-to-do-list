@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '@mui/system/Container';
 import TextField from '@mui/material/TextField';
@@ -8,10 +8,53 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import { RoutePath } from '../../utils/routeVariables';
+import { formFields, validateRule } from '../../utils/formVariables';
+import {
+  setMinMaxLengthError,
+  validateLogin,
+  validateMaxLength,
+  validateMinLength,
+  validatePassword,
+} from '../../utils/validator';
+
+const validator = {
+  [formFields.LOGIN]: [
+    validateMinLength(validateRule.REQUIRED_LENGTH),
+    validateMaxLength(validateRule.MAX_LENGTH),
+    validateLogin(validateRule.LOGIN_RULE),
+  ],
+  [formFields.PASSWORD]: [
+    validateMinLength(validateRule.PASSWORD_MIN_LENGTH),
+    validatePassword(validateRule.PASSWORD_RULE),
+  ],
+};
+
+const err = {
+  [formFields.LOGIN]: '',
+  [formFields.PASSWORD]: '',
+};
 
 export const FormSign = ({ isSignUp }) => {
-  const handleChange = () => {};
+  const [errStack, setErrStack] = useState(err);
+  const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (typeof value === 'string') {
+      err[name] = validator[name].reduce((acc, fn) => (acc += fn(value)), '');
+      setErrStack({ ...err });
+
+      if (Object.values(err).every((err) => !err)) {
+        setIsDisabledSubmitBtn(false);
+      } else {
+        setIsDisabledSubmitBtn(true);
+      }
+    }
+  };
+
   const handleSubmit = () => {};
+
   return (
     <main style={{ display: 'flex', alignItems: 'center' }}>
       <Container maxWidth="xl" sx={{ height: '100%', pb: 2 }}>
@@ -23,22 +66,22 @@ export const FormSign = ({ isSignUp }) => {
               </Typography>
 
               <TextField
-                // error={}
-                name="login"
+                error={!!errStack.login}
+                name={formFields.LOGIN}
                 fullWidth
                 autoFocus={isSignUp ? false : true}
                 label="Login"
                 defaultValue=""
-                // helperText={}
+                helperText={setMinMaxLengthError(errStack.login)}
                 margin="normal"
               />
               <TextField
-                // error={}
-                name="password"
+                error={!!errStack.password}
+                name={formFields.PASSWORD}
                 fullWidth
                 label="Password"
                 defaultValue=""
-                // helperText={}
+                helperText={setMinMaxLengthError(errStack.password)}
                 margin="normal"
                 type="password"
               />
@@ -46,7 +89,7 @@ export const FormSign = ({ isSignUp }) => {
                 // loading={}
                 loadingIndicator={<CircularProgress color="primary" size={25} />}
                 type="submit"
-                // disabled={}
+                disabled={isDisabledSubmitBtn}
                 variant="contained"
                 fullWidth
                 size="large"
