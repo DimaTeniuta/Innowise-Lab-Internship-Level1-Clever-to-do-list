@@ -23,30 +23,30 @@ export const FormSign = ({ isSignUp }) => {
               </Typography>
 
               <TextField
-                // error={!!errStack.login}
+                // error={}
                 name="login"
                 fullWidth
                 autoFocus={isSignUp ? false : true}
                 label="Login"
                 defaultValue=""
-                // helperText={setMinMaxLengthError(errStack.login)}
+                // helperText={}
                 margin="normal"
               />
               <TextField
-                // error={!!errStack.password}
+                // error={}
                 name="password"
                 fullWidth
                 label="Password"
                 defaultValue=""
-                // helperText={setMinMaxLengthError(errStack.password)}
+                // helperText={}
                 margin="normal"
                 type="password"
               />
               <LoadingButton
-                // loading={isSignUp ? isSignUpLoad : isSignInLoad}
+                // loading={}
                 loadingIndicator={<CircularProgress color="primary" size={25} />}
                 type="submit"
-                // disabled={isSigninLoading || isSignupLoading}
+                // disabled={}
                 variant="contained"
                 fullWidth
                 size="large"
