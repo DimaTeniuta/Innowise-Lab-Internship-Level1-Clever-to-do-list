@@ -1,29 +1,31 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from '../components/Layout/Layout';
+import { CalendarPage } from '../pages/CalendarPage';
 import { ErrorPage } from '../pages/ErrorPage';
 import { HomePage } from '../pages/HomePage/HomePage';
 import { SignInPage } from '../pages/SignInPage/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage/SignUpPage';
-import { RoutePath } from '../utils/routeVariables';
+import { routePath } from '../utils/routeVariables';
 
 export const AppRoute = () => {
   const isAuth = false;
   return (
     <Routes>
       {isAuth ? (
-        <Route path={RoutePath.HOME} element={<Layout />}>
+        <Route path={routePath.HOME} element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path={RoutePath.ERROR} element={<ErrorPage />} />
-          <Route path={RoutePath.GENERAL} element={<Navigate to={RoutePath.ERROR} replace />} />
+          <Route path={routePath.CALENDAR} element={<CalendarPage />} />
+          <Route path={routePath.ERROR} element={<ErrorPage />} />
+          <Route path={routePath.GENERAL} element={<Navigate to={routePath.ERROR} replace />} />
         </Route>
       ) : (
-        <Route path={RoutePath.HOME} element={<Layout />}>
+        <Route path={routePath.HOME} element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path={RoutePath.SIGN_IN} element={<SignInPage />} />
-          <Route path={RoutePath.SIGN_UP} element={<SignUpPage />} />
-          <Route path={RoutePath.ERROR} element={<ErrorPage />} />
-          <Route path={RoutePath.GENERAL} element={<Navigate to={RoutePath.ERROR} replace />} />
+          <Route path={routePath.SIGN_IN} element={<SignInPage />} />
+          <Route path={routePath.SIGN_UP} element={<SignUpPage />} />
+          <Route path={routePath.ERROR} element={<ErrorPage />} />
+          <Route path={routePath.GENERAL} element={<Navigate to={routePath.ERROR} replace />} />
         </Route>
       )}
     </Routes>

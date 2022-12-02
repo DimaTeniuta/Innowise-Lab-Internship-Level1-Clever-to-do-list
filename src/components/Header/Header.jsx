@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
-import { RoutePath } from '../../utils/routeVariables';
+import { routePath } from '../../utils/routeVariables';
 
 export const Header = () => {
   const isAuth = false;
@@ -30,7 +30,7 @@ export const Header = () => {
                   color: 'secondary.main',
                 },
               }}
-              to={RoutePath.HOME}
+              to={routePath.HOME}
             >
               T.Mamagement
             </Button>
@@ -66,7 +66,7 @@ export const Header = () => {
                     color: 'secondary.main',
                   },
                 }}
-                to={RoutePath.SIGN_IN}
+                to={routePath.SIGN_IN}
               >
                 SignIn
               </Button>
@@ -83,7 +83,7 @@ export const Header = () => {
                     color: 'secondary.main',
                   },
                 }}
-                to={RoutePath.SIGN_UP}
+                to={routePath.SIGN_UP}
               >
                 SignUp
               </Button>
