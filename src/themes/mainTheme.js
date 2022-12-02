@@ -1,13 +1,13 @@
 import { createTheme } from '@mui/material';
 
-export const themeBlue = createTheme({
+export const mainTheme = createTheme({
   palette: {
     primary: {
-      main: '#fefefe',
+      main: '#ffa726',
       contrastText: '#000',
     },
     secondary: {
-      main: '#ffa726',
+      main: '#fefefe',
       contrastText: '#153551',
     },
   },

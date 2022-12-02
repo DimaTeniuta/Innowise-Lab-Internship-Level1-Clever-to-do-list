@@ -8,15 +8,24 @@ import { SignUpPage } from '../pages/SignUpPage/SignUpPage';
 import { RoutePath } from '../utils/routeVariables';
 
 export const AppRoute = () => {
+  const isAuth = false;
   return (
     <Routes>
-      <Route path={RoutePath.HOME} element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path={RoutePath.SIGN_IN} element={<SignInPage />} />
-        <Route path={RoutePath.SIGN_UP} element={<SignUpPage />} />
-        <Route path={RoutePath.ERROR} element={<ErrorPage />} />
-        <Route path={RoutePath.GENERAL} element={<Navigate to={RoutePath.ERROR} replace />} />
-      </Route>
+      {isAuth ? (
+        <Route path={RoutePath.HOME} element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path={RoutePath.ERROR} element={<ErrorPage />} />
+          <Route path={RoutePath.GENERAL} element={<Navigate to={RoutePath.ERROR} replace />} />
+        </Route>
+      ) : (
+        <Route path={RoutePath.HOME} element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path={RoutePath.SIGN_IN} element={<SignInPage />} />
+          <Route path={RoutePath.SIGN_UP} element={<SignUpPage />} />
+          <Route path={RoutePath.ERROR} element={<ErrorPage />} />
+          <Route path={RoutePath.GENERAL} element={<Navigate to={RoutePath.ERROR} replace />} />
+        </Route>
+      )}
     </Routes>
   );
 };
