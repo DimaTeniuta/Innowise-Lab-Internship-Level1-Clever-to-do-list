@@ -11,18 +11,13 @@ import { RoutePath } from '../../utils/routeVariables';
 import { formFields, validateRule } from '../../utils/formVariables';
 import {
   setMinMaxLengthError,
-  validateLogin,
-  validateMaxLength,
+  validateEmail,
   validateMinLength,
   validatePassword,
 } from '../../utils/validator';
 
 const validator = {
-  [formFields.LOGIN]: [
-    validateMinLength(validateRule.REQUIRED_LENGTH),
-    validateMaxLength(validateRule.MAX_LENGTH),
-    validateLogin(validateRule.LOGIN_RULE),
-  ],
+  [formFields.LOGIN]: [validateEmail(validateRule.EMAIL)],
   [formFields.PASSWORD]: [
     validateMinLength(validateRule.PASSWORD_MIN_LENGTH),
     validatePassword(validateRule.PASSWORD_RULE),
@@ -44,7 +39,6 @@ export const FormSign = ({ isSignUp }) => {
     if (typeof value === 'string') {
       err[name] = validator[name].reduce((acc, fn) => (acc += fn(value)), '');
       setErrStack({ ...err });
-
       if (Object.values(err).every((err) => !err)) {
         setIsDisabledSubmitBtn(false);
       } else {
@@ -70,7 +64,7 @@ export const FormSign = ({ isSignUp }) => {
                 name={formFields.LOGIN}
                 fullWidth
                 autoFocus={isSignUp ? false : true}
-                label="Login"
+                label="Email"
                 defaultValue=""
                 helperText={setMinMaxLengthError(errStack.login)}
                 margin="normal"
