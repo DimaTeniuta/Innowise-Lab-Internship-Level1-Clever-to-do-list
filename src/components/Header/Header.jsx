@@ -18,12 +18,12 @@ export const Header = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                color: 'secondary.main',
+                color: 'primary.contrastText',
                 p: 1,
                 fontSize: 14,
                 textDecoration: 'none',
                 '&.active': {
-                  color: 'secondary.contrastText',
+                  color: 'secondary.main',
                 },
               }}
               to={RoutePath.HOME}
@@ -31,18 +31,18 @@ export const Header = () => {
               T.Mamagement
             </Button>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
             <Button
               component={NavLink}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                color: 'secondary.main',
+                color: 'primary.contrastText',
                 p: 1,
                 fontSize: 14,
                 textDecoration: 'none',
                 '&.active': {
-                  color: 'secondary.contrastText',
+                  color: 'secondary.main',
                 },
               }}
               to={RoutePath.SIGN_IN}
@@ -54,17 +54,17 @@ export const Header = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                color: 'secondary.main',
+                color: 'primary.contrastText',
                 p: 1,
                 fontSize: 14,
                 textDecoration: 'none',
                 '&.active': {
-                  color: 'secondary.contrastText',
+                  color: 'secondary.main',
                 },
               }}
-              to={RoutePath.SIGN_OUT}
+              to={RoutePath.SIGN_UP}
             >
-              SignOut
+              SignUp
             </Button>
           </Box>
         </Toolbar>

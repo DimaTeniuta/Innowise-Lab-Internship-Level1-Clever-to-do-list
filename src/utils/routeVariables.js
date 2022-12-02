@@ -3,5 +3,5 @@ export const RoutePath = {
   ERROR: 'error',
   GENERAL: '*',
   SIGN_IN: 'signin',
-  SIGN_OUT: 'signout',
+  SIGN_UP: 'signup',
 };
