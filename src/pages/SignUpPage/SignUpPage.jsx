@@ -4,15 +4,13 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../../api/firebase';
 
 export const SignUpPage = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth);
 
   return (
     <FormSign
       user={user}
       isSignUp={true}
       loading={loading}
-      error={error}
       signFunc={createUserWithEmailAndPassword}
     />
   );

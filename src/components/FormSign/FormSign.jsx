@@ -16,6 +16,8 @@ import {
   validatePassword,
 } from '../../utils/validator';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../store/userSlice';
 
 const validator = {
   [formFields.LOGIN]: [validateEmail(validateRule.EMAIL)],
@@ -30,10 +32,11 @@ const err = {
   [formFields.PASSWORD]: '',
 };
 
-export const FormSign = ({ isSignUp, signFunc, user, loading, error }) => {
+export const FormSign = ({ isSignUp, signFunc, loading }) => {
   const [errStack, setErrStack] = useState(err);
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,20 +67,28 @@ export const FormSign = ({ isSignUp, signFunc, user, loading, error }) => {
     if (isSignUp) {
       try {
         const res = await signFunc(dataValues.login, dataValues.password);
-        if (res) {
-          console.log(res, user, error);
-          navigate(`/${routePath.SIGN_IN}`, { replace: true });
-        }
+        dispatch(
+          setUser({
+            email: res.user.email,
+            token: res.user.accessToken,
+            id: res.user.uid,
+          })
+        );
+        navigate(`/${routePath.CALENDAR}`, { replace: true });
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
         const res = await signFunc(dataValues.login, dataValues.password);
-        if (res) {
-          console.log(res, user, error);
-          navigate(`/${routePath.CALENDAR}`, { replace: true });
-        }
+        dispatch(
+          setUser({
+            email: res.user.email,
+            token: res.user.accessToken,
+            id: res.user.uid,
+          })
+        );
+        navigate(`/${routePath.CALENDAR}`, { replace: true });
       } catch (err) {
         console.log(err);
       }
