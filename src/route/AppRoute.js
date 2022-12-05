@@ -8,8 +8,24 @@ import { HomePage } from '../pages/HomePage/HomePage';
 import { SignInPage } from '../pages/SignInPage/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage/SignUpPage';
 import { routePath } from '../utils/routeVariables';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/userSlice';
 
 export const AppRoute = () => {
+  const dispatch = useDispatch();
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(
+        setUser({
+          email: user.email,
+          token: user.accessToken,
+          id: user.uid,
+        })
+      );
+    }
+  });
   const { isAuth } = useAuth();
 
   return (

@@ -18,6 +18,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/userSlice';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const validator = {
   [formFields.LOGIN]: [validateEmail(validateRule.EMAIL)],
@@ -32,11 +33,13 @@ const err = {
   [formFields.PASSWORD]: '',
 };
 
-export const FormSign = ({ isSignUp, signFunc, loading }) => {
+export const FormSign = ({ isSignUp }) => {
   const [errStack, setErrStack] = useState(err);
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const auth = getAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,34 +67,23 @@ export const FormSign = ({ isSignUp, signFunc, loading }) => {
     }
 
     const dataValues = Object.fromEntries(formData.entries());
-    if (isSignUp) {
-      try {
-        const res = await signFunc(dataValues.login, dataValues.password);
-        dispatch(
-          setUser({
-            email: res.user.email,
-            token: res.user.accessToken,
-            id: res.user.uid,
-          })
-        );
-        navigate(`/${routePath.CALENDAR}`, { replace: true });
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      try {
-        const res = await signFunc(dataValues.login, dataValues.password);
-        dispatch(
-          setUser({
-            email: res.user.email,
-            token: res.user.accessToken,
-            id: res.user.uid,
-          })
-        );
-        navigate(`/${routePath.CALENDAR}`, { replace: true });
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      setIsLoading(true);
+      const res = isSignUp
+        ? await createUserWithEmailAndPassword(auth, dataValues.login, dataValues.password)
+        : await signInWithEmailAndPassword(auth, dataValues.login, dataValues.password);
+      dispatch(
+        setUser({
+          email: res.user.email,
+          token: res.user.accessToken,
+          id: res.user.uid,
+        })
+      );
+      navigate(`/${routePath.CALENDAR}`, { replace: true });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -126,7 +118,7 @@ export const FormSign = ({ isSignUp, signFunc, loading }) => {
                 type="password"
               />
               <LoadingButton
-                loading={loading}
+                loading={isLoading}
                 loadingIndicator={<CircularProgress color="primary" size={25} />}
                 type="submit"
                 disabled={isDisabledSubmitBtn}
