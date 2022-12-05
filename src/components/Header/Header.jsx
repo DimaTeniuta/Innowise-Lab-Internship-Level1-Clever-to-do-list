@@ -9,12 +9,14 @@ import { routePath } from '../../utils/routeVariables';
 import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { removeUser } from '../../store/userSlice';
+import { auth } from '../../api/firebase';
 
 export const Header = () => {
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
 
   const handleExit = () => {
+    auth.signOut();
     dispatch(removeUser());
   };
 

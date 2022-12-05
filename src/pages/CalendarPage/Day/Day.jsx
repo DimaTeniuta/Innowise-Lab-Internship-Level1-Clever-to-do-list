@@ -4,9 +4,13 @@ import { getWordDay } from '../../../utils/getWordDay';
 import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-export const Day = ({ day }) => {
+export const Day = ({ day, getTask }) => {
   const numberDay = new Date(day).getDate();
   const weekDay = getWordDay(new Date(day).getDay());
+
+  const sendData = () => {
+    getTask({ numberDay, weekDay });
+  };
 
   return (
     <Paper
@@ -19,7 +23,7 @@ export const Day = ({ day }) => {
         minWidth: '150px',
         p: 2,
       }}
-      onClick={() => console.log('open day')}
+      onClick={() => sendData()}
     >
       <Box
         sx={{
