@@ -3,13 +3,16 @@ import Box from '@mui/material/Box';
 import { getWordDay } from '../../../utils/getWordDay';
 import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { useDispatch } from 'react-redux';
+import { setDate } from '../../../store/dateSlice';
 
-export const Day = ({ day, getTask }) => {
+export const Day = ({ day }) => {
   const numberDay = new Date(day).getDate();
   const weekDay = getWordDay(new Date(day).getDay());
+  const dispatch = useDispatch();
 
   const sendData = () => {
-    getTask({ numberDay, weekDay });
+    dispatch(setDate({ date: day }));
   };
 
   return (
