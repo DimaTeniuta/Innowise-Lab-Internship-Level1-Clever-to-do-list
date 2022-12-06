@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from '../components/Layout/Layout';
 import { useAuth } from '../hooks/useAuth';
@@ -15,17 +15,21 @@ import { setUser } from '../store/userSlice';
 export const AppRoute = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      dispatch(
-        setUser({
-          email: user.email,
-          token: user.accessToken,
-          id: user.uid,
-        })
-      );
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUser({
+            email: user.email,
+            token: user.accessToken,
+            id: user.uid,
+          })
+        );
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { isAuth } = useAuth();
 
   return (

@@ -1,12 +1,21 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { Task } from '../Task/Task';
+import { Container } from '@mui/material';
 
 export const TaskBox = ({ children }) => {
+  console.log(children);
   return (
-    <Box>
-      <Button>Create Task</Button>
-      <Box>{children}</Box>
-    </Box>
+    <Container maxWidth="xl">
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Button>Create Task</Button>
+        <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: 1 }}>
+          <Task />
+          <Task />
+          <Task />
+        </Box>
+      </Box>
+    </Container>
   );
 };

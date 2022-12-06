@@ -7,13 +7,13 @@ import { store } from './store/store';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
         <ThemeProvider theme={mainTheme}>
           <AppRoute />
         </ThemeProvider>
-      </Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
 };
 

@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../api/firebase';
+// import { useAuthState } from 'react-firebase-hooks/auth';
+// import { auth } from '../api/firebase';
 
 export const useAuth = () => {
   const { email, token, id } = useSelector((state) => state.user);
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
 
   return {
-    isAuth: user,
+    isAuth: !!token,
     email,
     token,
     id,

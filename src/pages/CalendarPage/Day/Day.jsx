@@ -5,14 +5,28 @@ import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { useDispatch } from 'react-redux';
 import { setDate } from '../../../store/dateSlice';
+// import { getDatabase, ref, set } from 'firebase/database';
+// import { useAuth } from '../../../hooks/useAuth';
 
 export const Day = ({ day }) => {
   const numberDay = new Date(day).getDate();
   const weekDay = getWordDay(new Date(day).getDay());
   const dispatch = useDispatch();
+  // const { id, email } = useAuth();
+
+  // function writeUserData(userId, name, email, day) {
+  //   console.log(userId, name, email, day);
+  //   const db = getDatabase();
+  //   set(ref(db, 'users/' + userId), {
+  //     username: name,
+  //     email: email,
+  //     date: day,
+  //   });
+  // }
 
   const sendData = () => {
     dispatch(setDate({ date: day }));
+    // writeUserData(id, 'dima', email, day);
   };
 
   return (
