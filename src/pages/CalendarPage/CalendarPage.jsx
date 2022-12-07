@@ -42,7 +42,7 @@ export const CalendarPage = () => {
   return (
     <main>
       <Calendar />
-      {tasks && <TaskBox openTaskModal={handleOpenModal}>{tasks}</TaskBox>}
+      {tasks && <TaskBox openTaskModal={handleOpenModal}></TaskBox>}
       <TaskModal open={isOpenModal} onClose={handleCloseModal} />
     </main>
   );

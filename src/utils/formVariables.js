@@ -1,6 +1,8 @@
 export const formFields = {
   LOGIN: 'login',
   PASSWORD: 'password',
+  TITLE: 'title',
+  DESCRIPTION: 'description',
 };
 
 export const validateRule = {

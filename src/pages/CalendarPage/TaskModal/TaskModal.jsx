@@ -3,17 +3,26 @@ import { ModalWindow } from '../../../components/UI/ModalWindow';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { writeUserData } from '../../../api/writeUserData';
+import { useAuth } from '../../../hooks/useAuth';
 
-export const TaskModal = ({ open, onClose }) => {
-  const [titleValue, setTitleValue] = useState('');
-  const [descriptionValue, setDescriptionValue] = useState('');
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+export const TaskModal = ({ open, onClose, title, description, day }) => {
+  const [titleValue, setTitleValue] = useState(title || '');
+  const [descriptionValue, setDescriptionValue] = useState(description || '');
+  const date = new Date();
+  const taskId = day || date.setDate(date.getDate());
+  const { id } = useAuth();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    writeUserData(id, taskId, titleValue, descriptionValue, taskId);
+    onClose();
+  };
 
   return (
     <ModalWindow onClose={onClose} open={open} title={'Create task'}>
       <Box sx={{ width: { lg: '20vw' }, p: { lg: 2 } }}>
-        <form onSubmit={handleSubmit} onChange={handleChange}>
+        <form onSubmit={handleSubmit}>
           <TextField
             name={'Title'}
             fullWidth
@@ -23,8 +32,6 @@ export const TaskModal = ({ open, onClose }) => {
             }}
             value={titleValue}
             label={'Title'}
-            // error={}
-            // helperText={setMinMaxLengthError(errStack.taskTitle)}
             margin="normal"
           />
           <TextField
@@ -40,15 +47,7 @@ export const TaskModal = ({ open, onClose }) => {
             margin="normal"
           />
           <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: 2 }}>
-            <LoadingButton
-              // loading={isLoading}
-              type="submit"
-              variant="contained"
-              fullWidth
-              size="large"
-              // disabled={isDisabledSubmitBtn}
-              sx={{ mt: 2 }}
-            >
+            <LoadingButton type="submit" variant="contained" fullWidth size="large" sx={{ mt: 2 }}>
               {'Create task'}
             </LoadingButton>
             <Button
