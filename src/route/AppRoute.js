@@ -11,6 +11,8 @@ import { routePath } from '../utils/routeVariables';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/userSlice';
+import { readUserData } from '../api/readUserData';
+import { setData } from '../store/dataSlice';
 
 export const AppRoute = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,8 @@ export const AppRoute = () => {
             id: user.uid,
           })
         );
+        const data = readUserData(user.uid);
+        dispatch(setData({ data }));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

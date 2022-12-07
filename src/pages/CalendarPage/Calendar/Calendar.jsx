@@ -15,7 +15,7 @@ export const Calendar = () => {
     <Container maxWidth="xl" sx={{ overflowX: 'hidden' }}>
       <Box sx={{ display: 'flex', flexWrap: 'nowrap', columnGap: 2, p: 2, overflowX: 'scroll' }}>
         {calendar.map((day) => (
-          <Day key={day} day={day} />
+          <Day key={day} day={day} const />
         ))}
       </Box>
     </Container>

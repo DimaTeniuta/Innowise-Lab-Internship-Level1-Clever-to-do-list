@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { getWordDay } from '../../../utils/getWordDay';
 import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setDate } from '../../../store/dateSlice';
+import { transformDate } from '../../../utils/transformDate';
+import { useEffect } from 'react';
 
 export const Day = ({ day }) => {
   const numberDay = new Date(day).getDate();
   const weekDay = getWordDay(new Date(day).getDay());
   const dispatch = useDispatch();
+  const currentDate = transformDate(new Date(day));
+  const { data } = useSelector((state) => state.data);
+  const [isTasks, setIsTasks] = useState(false);
+
+  useEffect(() => {
+    if (data && Object.prototype.hasOwnProperty.call(data, currentDate)) {
+      setIsTasks(true);
+    }
+  }, [currentDate, data]);
 
   const sendData = () => {
     dispatch(setDate({ date: day }));
@@ -39,7 +50,7 @@ export const Day = ({ day }) => {
         <Box>{weekDay}</Box>
         <Box>{numberDay}</Box>
       </Box>
-      <Box>
+      <Box sx={{ display: isTasks ? 'flex' : 'none' }}>
         <FiberManualRecordIcon sx={{ width: 10, height: 10, color: 'gray' }} />
         <FiberManualRecordIcon sx={{ width: 10, height: 10, color: 'gray' }} />
       </Box>

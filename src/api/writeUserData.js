@@ -1,11 +1,12 @@
 import { getDatabase, ref, set } from 'firebase/database';
+import { transformDate } from '../utils/transformDate';
 
-export function writeUserData(userId, title, description, day) {
+export function writeUserData(userId, taskId, title, description, day) {
   const db = getDatabase();
-  const date = new Date(day).toLocaleDateString();
-  set(ref(db, userId + '/' + date), {
+  const date = transformDate(new Date(day));
+  set(ref(db, `${userId}/${date}/${taskId}`), {
+    taskId,
     title,
     description,
-    date: day,
   });
 }
