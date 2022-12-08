@@ -1,12 +1,13 @@
 import { getDatabase, ref, set } from 'firebase/database';
-import { transformDate } from '../utils/transformDate';
 
-export function writeUserData(userId, taskId, title, description, day) {
+export async function writeUserData(userId, currentDate, title, description, isComplete) {
   const db = getDatabase();
-  const date = transformDate(new Date(day));
-  set(ref(db, `${userId}/${date}/${taskId}`), {
+  const date = new Date();
+  const taskId = date.setDate(date.getDate());
+  await set(ref(db, `${userId}/${currentDate}/${taskId}`), {
     taskId,
     title,
     description,
+    complete: isComplete,
   });
 }

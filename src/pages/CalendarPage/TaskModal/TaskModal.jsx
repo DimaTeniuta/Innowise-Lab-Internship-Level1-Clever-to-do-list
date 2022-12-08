@@ -5,17 +5,17 @@ import { Button, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { writeUserData } from '../../../api/writeUserData';
 import { useAuth } from '../../../hooks/useAuth';
+import { useSelector } from 'react-redux';
 
-export const TaskModal = ({ open, onClose, title, description, day }) => {
+export const TaskModal = ({ open, onClose, title, description }) => {
   const [titleValue, setTitleValue] = useState(title || '');
   const [descriptionValue, setDescriptionValue] = useState(description || '');
-  const date = new Date();
-  const taskId = day || date.setDate(date.getDate());
+  const { date } = useSelector((state) => state.date);
   const { id } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    writeUserData(id, taskId, titleValue, descriptionValue, taskId);
+    writeUserData(id, date, titleValue, descriptionValue, false);
     onClose();
   };
 

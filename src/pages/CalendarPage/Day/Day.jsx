@@ -23,7 +23,7 @@ export const Day = ({ day }) => {
   }, [currentDate, data]);
 
   const sendData = () => {
-    dispatch(setDate({ date: day }));
+    dispatch(setDate({ date: currentDate }));
   };
 
   return (
@@ -50,9 +50,10 @@ export const Day = ({ day }) => {
         <Box>{weekDay}</Box>
         <Box>{numberDay}</Box>
       </Box>
-      <Box sx={{ display: isTasks ? 'flex' : 'none' }}>
-        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: 'gray' }} />
-        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: 'gray' }} />
+
+      <Box sx={{ display: 'flex' }}>
+        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'gray' : '#fff' }} />
+        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'gray' : '#fff' }} />
       </Box>
     </Paper>
   );

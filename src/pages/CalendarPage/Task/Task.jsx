@@ -6,8 +6,9 @@ import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUnc
 import { useState } from 'react';
 import { Paper } from '@mui/material';
 
-export const Task = () => {
+export const Task = ({ data }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const { title, description } = data;
 
   const handleChange = () => {
     setIsChecked(!isChecked);
@@ -21,8 +22,8 @@ export const Task = () => {
         onChange={handleChange}
         checked={isChecked}
       />
-      <Box>Title</Box>
-      <Box>Description</Box>
+      <Box>{title}</Box>
+      <Box>{description}</Box>
     </Paper>
   );
 };
