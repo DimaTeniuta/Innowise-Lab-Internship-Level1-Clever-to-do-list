@@ -12,10 +12,19 @@ export const TaskModal = ({ open, onClose, title, description }) => {
   const [descriptionValue, setDescriptionValue] = useState(description || '');
   const { date } = useSelector((state) => state.date);
   const { id } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    writeUserData(id, date, titleValue, descriptionValue, false);
+    try {
+      setIsLoading(true);
+      await writeUserData(id, date, titleValue, descriptionValue, false);
+    } catch (err) {
+      console.log(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+
     onClose();
   };
 
@@ -47,7 +56,14 @@ export const TaskModal = ({ open, onClose, title, description }) => {
             margin="normal"
           />
           <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: 2 }}>
-            <LoadingButton type="submit" variant="contained" fullWidth size="large" sx={{ mt: 2 }}>
+            <LoadingButton
+              isLoading={isLoading}
+              type="submit"
+              variant="contained"
+              fullWidth
+              size="large"
+              sx={{ mt: 2 }}
+            >
               {'Create task'}
             </LoadingButton>
             <Button

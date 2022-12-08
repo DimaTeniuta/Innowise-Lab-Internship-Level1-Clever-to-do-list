@@ -17,7 +17,7 @@ import {
 } from '../../utils/validator';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../store/userSlice';
+import { setUser } from '../../store/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const validator = {

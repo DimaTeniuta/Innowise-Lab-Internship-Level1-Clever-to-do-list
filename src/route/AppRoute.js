@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from '../components/Layout/Layout';
 import { useAuth } from '../hooks/useAuth';
@@ -8,31 +8,31 @@ import { HomePage } from '../pages/HomePage/HomePage';
 import { SignInPage } from '../pages/SignInPage/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage/SignUpPage';
 import { routePath } from '../utils/routeVariables';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../store/userSlice';
-import { readUserData } from '../api/readUserData';
-import { setData } from '../store/dataSlice';
+// import { getAuth, onAuthStateChanged } from 'firebase/auth';
+// import { useDispatch } from 'react-redux';
+// import { setUser } from '../store/userSlice';
+// import { readUserData } from '../api/readUserData';
+// import { setData } from '../store/dataSlice';
 
 export const AppRoute = () => {
-  const dispatch = useDispatch();
-  const auth = getAuth();
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(
-          setUser({
-            email: user.email,
-            token: user.accessToken,
-            id: user.uid,
-          })
-        );
-        const data = readUserData(user.uid);
-        dispatch(setData({ data }));
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // const dispatch = useDispatch();
+  // const auth = getAuth();
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       dispatch(
+  //         setUser({
+  //           email: user.email,
+  //           token: user.accessToken,
+  //           id: user.uid,
+  //         })
+  //       );
+  //       const data = readUserData(user.uid);
+  //       dispatch(setData({ data }));
+  //     }
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const { isAuth } = useAuth();
 

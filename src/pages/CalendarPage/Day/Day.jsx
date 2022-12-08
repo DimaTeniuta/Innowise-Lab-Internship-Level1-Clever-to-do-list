@@ -4,7 +4,7 @@ import { getWordDay } from '../../../utils/getWordDay';
 import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDate } from '../../../store/dateSlice';
+import { setDate } from '../../../store/slices/dateSlice';
 import { transformDate } from '../../../utils/transformDate';
 import { useEffect } from 'react';
 
@@ -22,7 +22,7 @@ export const Day = ({ day }) => {
     }
   }, [currentDate, data]);
 
-  const sendData = () => {
+  const sendDate = () => {
     dispatch(setDate({ date: currentDate }));
   };
 
@@ -37,7 +37,7 @@ export const Day = ({ day }) => {
         minWidth: '150px',
         p: 2,
       }}
-      onClick={() => sendData()}
+      onClick={() => sendDate()}
     >
       <Box
         sx={{

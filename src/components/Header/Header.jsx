@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { routePath } from '../../utils/routeVariables';
 import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
-import { removeUser } from '../../store/userSlice';
+import { removeUser } from '../../store/slices/userSlice';
 import { auth } from '../../api/firebase';
 
 export const Header = () => {
