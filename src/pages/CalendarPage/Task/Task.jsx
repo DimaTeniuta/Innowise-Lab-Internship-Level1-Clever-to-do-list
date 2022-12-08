@@ -8,6 +8,8 @@ import { Paper } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateTaskData } from '../../../api/updateTaskData';
+import { TrashBasket } from '../TrashBasket/TrashBasket';
+import { UpdateButton } from '../UpdateButton/UpadateButton';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -24,16 +26,25 @@ export const Task = ({ data }) => {
     }
   };
 
+  const handleUpdate = () => {};
+  const handleDelete = () => {};
+
   return (
-    <Paper variant="3" sx={{ display: 'flex', alignItems: 'center', columnGap: 2, p: 1 }}>
-      <Checkbox
-        icon={<RadioButtonUncheckedOutlinedIcon />}
-        checkedIcon={<CheckCircleOutlinedIcon />}
-        onChange={handleChange}
-        checked={isChecked}
-      />
-      <Box>{title}</Box>
-      <Box>{description}</Box>
+    <Paper variant="3" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2, p: 1 }}>
+        <Checkbox
+          icon={<RadioButtonUncheckedOutlinedIcon />}
+          checkedIcon={<CheckCircleOutlinedIcon />}
+          onChange={handleChange}
+          checked={isChecked}
+        />
+        <Box>{title}</Box>
+        <Box>{description}</Box>
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
+        <UpdateButton onAction={handleUpdate} />
+        <TrashBasket onAction={handleDelete} />
+      </Box>
     </Paper>
   );
 };
