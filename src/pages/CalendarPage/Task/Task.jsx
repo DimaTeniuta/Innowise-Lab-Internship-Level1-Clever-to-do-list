@@ -5,13 +5,23 @@ import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined';
 import { useState } from 'react';
 import { Paper } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useAuth } from '../../../hooks/useAuth';
+import { updateTaskData } from '../../../api/updateTaskData';
 
 export const Task = ({ data }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const { title, description } = data;
+  const { title, description, complete, taskId } = data;
+  const [isChecked, setIsChecked] = useState(complete);
+  const { date } = useSelector((state) => state.date);
+  const { id } = useAuth();
 
-  const handleChange = () => {
+  const handleChange = async () => {
     setIsChecked(!isChecked);
+    try {
+      await updateTaskData(id, taskId, date, title, description, !isChecked);
+    } catch (err) {
+      console.log('task update', err.message);
+    }
   };
 
   return (

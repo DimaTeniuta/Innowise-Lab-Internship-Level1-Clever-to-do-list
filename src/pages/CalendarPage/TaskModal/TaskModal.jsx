@@ -57,7 +57,7 @@ export const TaskModal = ({ open, onClose, title, description }) => {
           />
           <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: 2 }}>
             <LoadingButton
-              isLoading={isLoading}
+              loading={isLoading}
               type="submit"
               variant="contained"
               fullWidth
