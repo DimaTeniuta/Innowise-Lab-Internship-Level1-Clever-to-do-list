@@ -7,10 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDate } from '../../../store/slices/dateSlice';
 import { transformDate } from '../../../utils/transformDate';
 import { useEffect } from 'react';
+import { getMonth } from '../../../utils/getMonth';
 
 export const Day = ({ day }) => {
   const numberDay = new Date(day).getDate();
   const weekDay = getWordDay(new Date(day).getDay());
+  const month = getMonth(new Date(day).getMonth());
   const dispatch = useDispatch();
   const currentDate = transformDate(new Date(day));
   const { data } = useSelector((state) => state.data);
@@ -47,8 +49,9 @@ export const Day = ({ day }) => {
           justifyContent: 'space-between',
         }}
       >
-        <Box>{weekDay}</Box>
-        <Box>{numberDay}</Box>
+        <Box>{month}</Box>
+        <Box sx={{ fontSize: 24 }}>{weekDay}</Box>
+        <Box sx={{ fontSize: 24 }}>{numberDay}</Box>
       </Box>
 
       <Box sx={{ display: 'flex' }}>
