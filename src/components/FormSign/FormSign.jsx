@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { alertError, alertSuccess } from '../../store/slices/alertSlice';
 
 const validator = {
   [formFields.LOGIN]: [validateEmail(validateRule.EMAIL)],
@@ -72,6 +73,7 @@ export const FormSign = ({ isSignUp }) => {
       const res = isSignUp
         ? await createUserWithEmailAndPassword(auth, dataValues.login, dataValues.password)
         : await signInWithEmailAndPassword(auth, dataValues.login, dataValues.password);
+
       dispatch(
         setUser({
           email: res.user.email,
@@ -80,8 +82,11 @@ export const FormSign = ({ isSignUp }) => {
         })
       );
       navigate(`/${routePath.CALENDAR}`, { replace: true });
+      dispatch(alertSuccess());
     } catch (err) {
-      console.log(err);
+      navigate(`/${routePath.SIGN_IN}`, { replace: true });
+      dispatch(alertError('Wrong email or password'));
+      throw new Error('Auth', err.message);
     } finally {
       setIsLoading(false);
     }

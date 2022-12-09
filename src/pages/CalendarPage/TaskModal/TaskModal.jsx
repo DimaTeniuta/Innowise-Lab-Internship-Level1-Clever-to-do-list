@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeTaskModal } from '../../../store/slices/taskModalSlice';
 import { useEffect } from 'react';
 import { updateTaskData } from '../../../api/updateTaskData';
+import { alertError, alertSuccess } from '../../../store/slices/alertSlice';
 
 export const TaskModal = () => {
   const {
@@ -36,8 +37,10 @@ export const TaskModal = () => {
       try {
         setIsLoading(true);
         await writeUserData(id, date, titleValue, descriptionValue, false);
+        dispatch(alertSuccess());
       } catch (err) {
-        console.log('writeData', err.message);
+        dispatch(alertError(err.message));
+        throw new Error('writeData', err.message);
       } finally {
         setIsLoading(false);
       }
@@ -45,8 +48,10 @@ export const TaskModal = () => {
       try {
         setIsLoading(true);
         await updateTaskData(id, taskId, date, titleValue, descriptionValue, complete);
+        dispatch(alertSuccess());
       } catch (err) {
-        console.log('updateData', err.message);
+        dispatch(alertError(err.message));
+        throw new Error('updateData', err.message);
       } finally {
         setIsLoading(false);
       }
@@ -56,7 +61,7 @@ export const TaskModal = () => {
   };
 
   return (
-    <ModalWindow onClose={onClose} open={open} title={'Create task'}>
+    <ModalWindow onClose={onClose} open={open} title={isCreateType ? 'Create task' : 'Update task'}>
       <Box sx={{ width: { lg: '20vw' }, p: { lg: 2 } }}>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -91,7 +96,7 @@ export const TaskModal = () => {
               size="large"
               sx={{ mt: 2 }}
             >
-              {'Create task'}
+              {isCreateType ? 'Create task' : 'Update task'}
             </LoadingButton>
             <Button
               type="reset"

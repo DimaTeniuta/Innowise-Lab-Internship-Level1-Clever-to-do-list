@@ -3,6 +3,7 @@ import userReducer from './slices/userSlice';
 import dateReducer from './slices/dateSlice';
 import dataReducer from './slices/dataSlice';
 import taskModalReducer from './slices/taskModalSlice';
+import alertReducer from './slices/alertSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     user: userReducer,
     data: dataReducer,
     taskModalData: taskModalReducer,
+    alert: alertReducer,
   },
 });
