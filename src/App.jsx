@@ -7,8 +7,9 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 import { setUser } from './store/slices/userSlice';
 import { setData } from './store/slices/dataSlice';
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { ref, onValue } from 'firebase/database';
 import { useAuth } from './hooks/useAuth';
+import { db } from './api/firebase';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const App = () => {
 
   useEffect(() => {
     if (id) {
-      const db = getDatabase();
       const dataRef = ref(db, id);
       onValue(dataRef, (snapshot) => {
         const data = snapshot.val();

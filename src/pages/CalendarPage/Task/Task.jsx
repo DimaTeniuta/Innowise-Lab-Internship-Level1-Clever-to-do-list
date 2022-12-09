@@ -11,6 +11,7 @@ import { updateTaskData } from '../../../api/updateTaskData';
 import { TrashBasket } from '../TrashBasket/TrashBasket';
 import { UpdateButton } from '../UpdateButton/UpadateButton';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
+import { removeTaskData } from '../../../api/removeTaskData';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -41,7 +42,14 @@ export const Task = ({ data }) => {
     };
     dispatch(setTaskData({ taskData }));
   };
-  const handleDelete = () => {};
+
+  const handleDelete = async () => {
+    try {
+      await removeTaskData(id, taskId, date);
+    } catch (err) {
+      console.log('remove', err.message);
+    }
+  };
 
   return (
     <Paper variant="3" sx={{ display: 'flex', justifyContent: 'space-between' }}>

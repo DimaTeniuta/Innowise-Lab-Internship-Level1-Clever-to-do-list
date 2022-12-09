@@ -22,7 +22,6 @@ export const TaskModal = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(2222);
     setTitleValue(title);
     setDescriptionValue(description);
   }, [description, title]);

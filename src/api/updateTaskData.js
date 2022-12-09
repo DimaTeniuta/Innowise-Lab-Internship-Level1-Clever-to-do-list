@@ -1,7 +1,7 @@
-import { getDatabase, ref, update } from 'firebase/database';
+import { ref, update } from 'firebase/database';
+import { db } from './firebase';
 
 export function updateTaskData(userId, taskId, currentDate, title, description, complete) {
-  const db = getDatabase();
   const taskData = {
     title,
     description,
