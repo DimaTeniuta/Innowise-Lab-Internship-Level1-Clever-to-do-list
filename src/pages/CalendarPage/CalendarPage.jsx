@@ -10,15 +10,6 @@ export const CalendarPage = () => {
   const { date } = useSelector((state) => state.date);
   const [tasks, setTasks] = useState(null);
   const dispatch = useDispatch();
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-  };
-
-  const handleOpenModal = () => {
-    setIsOpenModal(true);
-  };
 
   useEffect(() => {
     setTasks(date);
@@ -32,8 +23,8 @@ export const CalendarPage = () => {
   return (
     <main>
       <Calendar />
-      {tasks && <TaskBox openTaskModal={handleOpenModal}></TaskBox>}
-      <TaskModal open={isOpenModal} onClose={handleCloseModal} />
+      {tasks && <TaskBox></TaskBox>}
+      <TaskModal />
     </main>
   );
 };

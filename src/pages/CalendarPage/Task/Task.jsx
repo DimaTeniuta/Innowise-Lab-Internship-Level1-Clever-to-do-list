@@ -5,28 +5,42 @@ import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined';
 import { useState } from 'react';
 import { Paper } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateTaskData } from '../../../api/updateTaskData';
 import { TrashBasket } from '../TrashBasket/TrashBasket';
 import { UpdateButton } from '../UpdateButton/UpadateButton';
+import { setTaskData } from '../../../store/slices/taskModalSlice';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
   const [isChecked, setIsChecked] = useState(complete);
   const { date } = useSelector((state) => state.date);
   const { id } = useAuth();
+  const dispatch = useDispatch();
 
   const handleChange = async () => {
-    setIsChecked(!isChecked);
     try {
       await updateTaskData(id, taskId, date, title, description, !isChecked);
+      setIsChecked(!isChecked);
     } catch (err) {
       console.log('task update', err.message);
     }
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = () => {
+    const taskData = {
+      title,
+      description,
+      complete: isChecked,
+      open: true,
+      isCreateType: false,
+      taskId: taskId,
+      userId: id,
+      date,
+    };
+    dispatch(setTaskData({ taskData }));
+  };
   const handleDelete = () => {};
 
   return (

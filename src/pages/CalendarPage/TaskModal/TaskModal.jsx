@@ -5,24 +5,52 @@ import { Button, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { writeUserData } from '../../../api/writeUserData';
 import { useAuth } from '../../../hooks/useAuth';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeTaskModal } from '../../../store/slices/taskModalSlice';
+import { useEffect } from 'react';
+import { updateTaskData } from '../../../api/updateTaskData';
 
-export const TaskModal = ({ open, onClose, title, description }) => {
-  const [titleValue, setTitleValue] = useState(title || '');
-  const [descriptionValue, setDescriptionValue] = useState(description || '');
+export const TaskModal = () => {
+  const {
+    taskData: { title, description, open, isCreateType, taskId, complete },
+  } = useSelector((state) => state.taskModalData);
+  const [titleValue, setTitleValue] = useState(title);
+  const [descriptionValue, setDescriptionValue] = useState(description);
   const { date } = useSelector((state) => state.date);
   const { id } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(2222);
+    setTitleValue(title);
+    setDescriptionValue(description);
+  }, [description, title]);
+
+  const onClose = () => {
+    dispatch(closeTaskModal());
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setIsLoading(true);
-      await writeUserData(id, date, titleValue, descriptionValue, false);
-    } catch (err) {
-      console.log(err.message);
-    } finally {
-      setIsLoading(false);
+    if (isCreateType) {
+      try {
+        setIsLoading(true);
+        await writeUserData(id, date, titleValue, descriptionValue, false);
+      } catch (err) {
+        console.log('writeData', err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      try {
+        setIsLoading(true);
+        await updateTaskData(id, taskId, date, titleValue, descriptionValue, complete);
+      } catch (err) {
+        console.log('updateData', err.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     onClose();
