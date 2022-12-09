@@ -6,18 +6,19 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { writeUserData } from '../../../api/writeUserData';
 import { useAuth } from '../../../hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeTaskModal } from '../../../store/slices/taskModalSlice';
+import { closeTaskModal, selectTaskModalDate } from '../../../store/slices/taskModalSlice';
 import { useEffect } from 'react';
 import { updateTaskData } from '../../../api/updateTaskData';
 import { alertError, alertSuccess } from '../../../store/slices/alertSlice';
+import { selectDate } from '../../../store/slices/dateSlice';
 
 export const TaskModal = () => {
   const {
     taskData: { title, description, open, isCreateType, taskId, complete },
-  } = useSelector((state) => state.taskModalData);
+  } = useSelector(selectTaskModalDate);
   const [titleValue, setTitleValue] = useState(title);
   const [descriptionValue, setDescriptionValue] = useState(description);
-  const { date } = useSelector((state) => state.date);
+  const { date } = useSelector(selectDate);
   const { id } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ export const TaskModal = () => {
 
   const onClose = () => {
     dispatch(closeTaskModal());
+    setTitleValue('');
+    setDescriptionValue('');
   };
 
   const handleSubmit = async (e) => {

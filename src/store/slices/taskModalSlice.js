@@ -27,4 +27,5 @@ const taskModalSlice = createSlice({
 });
 
 export const { setTaskData, closeTaskModal } = taskModalSlice.actions;
+export const selectTaskModalDate = (state) => state.taskModalData;
 export default taskModalSlice.reducer;

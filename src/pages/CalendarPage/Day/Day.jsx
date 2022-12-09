@@ -8,6 +8,7 @@ import { setDate } from '../../../store/slices/dateSlice';
 import { transformDate } from '../../../utils/transformDate';
 import { useEffect } from 'react';
 import { getMonth } from '../../../utils/getMonth';
+import { selectData } from '../../../store/slices/dataSlice';
 
 export const Day = ({ day }) => {
   const numberDay = new Date(day).getDate();
@@ -15,7 +16,7 @@ export const Day = ({ day }) => {
   const month = getMonth(new Date(day).getMonth());
   const dispatch = useDispatch();
   const currentDate = transformDate(new Date(day));
-  const { data } = useSelector((state) => state.data);
+  const { data } = useSelector(selectData);
   const [isTasks, setIsTasks] = useState(false);
 
   useEffect(() => {

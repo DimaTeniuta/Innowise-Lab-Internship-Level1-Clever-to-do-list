@@ -30,4 +30,5 @@ const alertSlice = createSlice({
 });
 
 export const { alertError, alertSuccess, hideAlert } = alertSlice.actions;
+export const selectAlert = (state) => state.alert;
 export default alertSlice.reducer;

@@ -12,11 +12,12 @@ import { TrashBasket } from '../TrashBasket/TrashBasket';
 import { UpdateButton } from '../UpdateButton/UpadateButton';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { removeTaskData } from '../../../api/removeTaskData';
+import { selectDate } from '../../../store/slices/dateSlice';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
   const [isChecked, setIsChecked] = useState(complete);
-  const { date } = useSelector((state) => state.date);
+  const { date } = useSelector(selectDate);
   const { id } = useAuth();
   const dispatch = useDispatch();
 

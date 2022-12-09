@@ -15,4 +15,5 @@ const dataSlice = createSlice({
 });
 
 export const { setData } = dataSlice.actions;
+export const selectData = (state) => state.data;
 export default dataSlice.reducer;

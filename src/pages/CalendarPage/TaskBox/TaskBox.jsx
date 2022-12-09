@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Task } from '../Task/Task';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
+import { selectData } from '../../../store/slices/dataSlice';
+import { selectDate } from '../../../store/slices/dateSlice';
 
 export const TaskBox = () => {
-  const { date } = useSelector((state) => state.date);
-  const { data } = useSelector((state) => state.data);
+  const { date } = useSelector(selectDate);
+  const { data } = useSelector(selectData);
   const [tasks, setTasks] = useState([]);
   const dispatch = useDispatch();
 

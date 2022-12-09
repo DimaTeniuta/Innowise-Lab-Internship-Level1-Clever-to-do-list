@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Slide from '@mui/material/Slide';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideAlert } from '../../../store/slices/alertSlice';
+import { hideAlert, selectAlert } from '../../../store/slices/alertSlice';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="standard" {...props} />;
@@ -17,7 +17,7 @@ export const Notifier = () => {
   const dispatch = useDispatch();
   const {
     alert: { open, text, type },
-  } = useSelector((state) => state.alert);
+  } = useSelector(selectAlert);
   const [transition, setTransition] = useState(undefined);
 
   useEffect(() => {
