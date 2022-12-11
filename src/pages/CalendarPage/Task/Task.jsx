@@ -13,6 +13,7 @@ import { UpdateButton } from '../UpdateButton/UpadateButton';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { removeTaskData } from '../../../api/removeTaskData';
 import { selectDate } from '../../../store/slices/dateSlice';
+import { alertError } from '../../../store/slices/alertSlice';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -48,7 +49,8 @@ export const Task = ({ data }) => {
     try {
       await removeTaskData(id, taskId, date);
     } catch (err) {
-      console.log('remove', err.message);
+      dispatch(alertError(err.message));
+      throw new Error('remove', err.message);
     }
   };
 

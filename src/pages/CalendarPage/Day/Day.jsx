@@ -18,10 +18,16 @@ export const Day = ({ day }) => {
   const currentDate = transformDate(new Date(day));
   const { data } = useSelector(selectData);
   const [isTasks, setIsTasks] = useState(false);
+  const [isCompletedTasks, setIsCompletedTasks] = useState(false);
 
   useEffect(() => {
     if (data && Object.prototype.hasOwnProperty.call(data, currentDate)) {
       setIsTasks(true);
+
+      const isCompleteTask = Object.values(data[currentDate]).every((task) => !task.complete);
+      setIsCompletedTasks(!isCompleteTask);
+    } else {
+      setIsTasks(false);
     }
   }, [currentDate, data]);
 
@@ -39,6 +45,9 @@ export const Day = ({ day }) => {
         justifyContent: 'space-between',
         minWidth: '150px',
         p: 2,
+        ':hover': {
+          cursor: 'pointer',
+        },
       }}
       onClick={() => sendDate()}
     >
@@ -56,8 +65,10 @@ export const Day = ({ day }) => {
       </Box>
 
       <Box sx={{ display: 'flex' }}>
-        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'gray' : '#fff' }} />
-        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'gray' : '#fff' }} />
+        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'dark' : '#fff' }} />
+        <FiberManualRecordIcon
+          sx={{ width: 10, height: 10, color: isCompletedTasks ? 'gray' : '#fff' }}
+        />
       </Box>
     </Paper>
   );

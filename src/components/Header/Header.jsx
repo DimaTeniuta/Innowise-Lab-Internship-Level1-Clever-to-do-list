@@ -40,7 +40,7 @@ export const Header = () => {
               }}
               to={routePath.HOME}
             >
-              T.Mamagement
+              T.Management
             </Button>
           </Box>
           {isAuth ? (
