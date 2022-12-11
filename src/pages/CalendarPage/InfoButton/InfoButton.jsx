@@ -1,8 +1,8 @@
 import IconButton from '@mui/material/IconButton';
 import React from 'react';
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-export const UpdateButton = ({ onAction }) => {
+export const InfoButton = ({ onAction }) => {
   return (
     <IconButton
       onClick={onAction}
@@ -15,7 +15,7 @@ export const UpdateButton = ({ onAction }) => {
         transition: '0.3s',
       }}
     >
-      <ModeEditOutlineOutlinedIcon />
+      <InfoOutlinedIcon />
     </IconButton>
   );
 };

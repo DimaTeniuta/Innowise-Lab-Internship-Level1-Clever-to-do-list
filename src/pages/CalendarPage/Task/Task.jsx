@@ -14,6 +14,7 @@ import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { removeTaskData } from '../../../api/removeTaskData';
 import { selectDate } from '../../../store/slices/dateSlice';
 import { alertError } from '../../../store/slices/alertSlice';
+import { InfoButton } from '../InfoButton/InfoButton';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -54,9 +55,26 @@ export const Task = ({ data }) => {
     }
   };
 
+  const handleInfo = () => {};
+
   return (
-    <Paper variant="3" sx={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2, p: 1 }}>
+    <Paper
+      variant="3"
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+        justifyContent: 'space-between',
+        backgroundColor: 'rgba(242, 236, 220, 0.3)',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          columnGap: 2,
+          p: 1,
+        }}
+      >
         <Checkbox
           icon={<RadioButtonUncheckedOutlinedIcon />}
           checkedIcon={<CheckCircleOutlinedIcon />}
@@ -66,7 +84,15 @@ export const Task = ({ data }) => {
         <Box>{title}</Box>
         <Box>{description}</Box>
       </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: { xs: 'end', sm: 'end' },
+          columnGap: 2,
+        }}
+      >
+        <InfoButton onAction={handleInfo} />
         <UpdateButton onAction={handleUpdate} />
         <TrashBasket onAction={handleDelete} />
       </Box>

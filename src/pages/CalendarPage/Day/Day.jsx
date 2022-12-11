@@ -4,7 +4,7 @@ import { getWordDay } from '../../../utils/getWordDay';
 import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDate } from '../../../store/slices/dateSlice';
+import { selectDate, setDate } from '../../../store/slices/dateSlice';
 import { transformDate } from '../../../utils/transformDate';
 import { useEffect } from 'react';
 import { getMonth } from '../../../utils/getMonth';
@@ -17,8 +17,21 @@ export const Day = ({ day }) => {
   const dispatch = useDispatch();
   const currentDate = transformDate(new Date(day));
   const { data } = useSelector(selectData);
+  const { date } = useSelector(selectDate);
   const [isTasks, setIsTasks] = useState(false);
   const [isCompletedTasks, setIsCompletedTasks] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  console.log(date, currentDate);
+
+  useEffect(() => {
+    if (date === currentDate) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   useEffect(() => {
     if (data && Object.prototype.hasOwnProperty.call(data, currentDate)) {
@@ -45,6 +58,7 @@ export const Day = ({ day }) => {
         justifyContent: 'space-between',
         minWidth: '150px',
         p: 2,
+        border: isActive ? '2px solid #ffa726' : '2px solid #fefefe',
         ':hover': {
           cursor: 'pointer',
         },
