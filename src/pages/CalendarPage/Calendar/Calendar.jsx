@@ -2,14 +2,10 @@ import { Container } from '@mui/material';
 import React from 'react';
 import { Day } from '../Day/Day';
 import Box from '@mui/material/Box';
-import { MONTH_LENGTH } from '../../../utils/variables';
+import { useCalendar } from '../../../hooks/useCalendar';
 
 export const Calendar = () => {
-  const date = new Date();
-  const calendar = [date.setDate(date.getDate())];
-  while (calendar.length < MONTH_LENGTH) {
-    calendar.push(date.setDate(date.getDate() + 1));
-  }
+  const calendar = useCalendar();
 
   return (
     <Container maxWidth="xl" sx={{ overflowX: 'hidden' }}>
