@@ -3,10 +3,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
 import { routePath } from '../../utils/routeVariables';
+import Link from '@mui/material/Link';
 
-export const ErrorPage = ({ isNotFound = true }) => {
+export const ErrorPage = ({ isNotFound }) => {
   return (
     <main>
       <Container sx={{ pt: 5 }}>
@@ -23,7 +23,7 @@ export const ErrorPage = ({ isNotFound = true }) => {
 
         <Grid container justifyContent="center" gap={2} my={4}>
           <Grid item>
-            <Button component={Link} variant="contained" to={routePath.HOME}>
+            <Button component={Link} variant="contained" href={routePath.HOME}>
               {'Back to Home'}
             </Button>
           </Grid>
