@@ -9,7 +9,7 @@ const initialState = {
     isCreateType: true,
     taskId: null,
     userId: null,
-    date: null,
+    tasDate: null,
   },
 };
 

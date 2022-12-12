@@ -46,7 +46,7 @@ export const Task = ({ data }) => {
       isCreateType: false,
       taskId: taskId,
       userId: id,
-      date,
+      taskDate: date,
     };
     dispatch(setTaskData({ taskData }));
   };

@@ -11,10 +11,17 @@ import { useEffect } from 'react';
 import { updateTaskData } from '../../../api/updateTaskData';
 import { alertError, alertSuccess } from '../../../store/slices/alertSlice';
 import { selectDate } from '../../../store/slices/dateSlice';
+import { DesktopDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Stack from '@mui/material/Stack';
+import dayjs from 'dayjs';
+import { transformCalendarDate } from '../../../utils/transformDate';
+import { removeTaskData } from '../../../api/removeTaskData';
 
 export const TaskModal = () => {
   const {
-    taskData: { title, description, open, isCreateType, taskId, complete },
+    taskData: { title, description, open, isCreateType, taskId, complete, taskDate },
   } = useSelector(selectTaskModalDate);
   const [titleValue, setTitleValue] = useState(title);
   const [descriptionValue, setDescriptionValue] = useState(description);
@@ -22,11 +29,28 @@ export const TaskModal = () => {
   const { id } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const [dateValue, setDateValue] = useState(dayjs(new Date()));
+
+  const handleChange = (newValue) => {
+    setDateValue(newValue);
+  };
+
+  useEffect(() => {
+    if (date) {
+      setDateValue(date.split('-').reverse().join(''));
+    }
+  }, [date]);
 
   useEffect(() => {
     setTitleValue(title);
     setDescriptionValue(description);
   }, [description, title]);
+
+  useEffect(() => {
+    if (taskDate) {
+      setDateValue(taskDate.split('-').reverse().join(''));
+    }
+  }, [taskDate]);
 
   const onClose = () => {
     dispatch(closeTaskModal());
@@ -39,7 +63,8 @@ export const TaskModal = () => {
     if (isCreateType) {
       try {
         setIsLoading(true);
-        await writeUserData(id, date, titleValue, descriptionValue, false);
+        let currentDate = transformCalendarDate(dateValue);
+        await writeUserData(id, currentDate, titleValue, descriptionValue, false);
         dispatch(alertSuccess());
       } catch (err) {
         dispatch(alertError(err.message));
@@ -50,7 +75,11 @@ export const TaskModal = () => {
     } else {
       try {
         setIsLoading(true);
-        await updateTaskData(id, taskId, date, titleValue, descriptionValue, complete);
+        let currentDate = transformCalendarDate(dateValue);
+        await updateTaskData(id, taskId, currentDate, titleValue, descriptionValue, complete);
+        if (currentDate !== date) {
+          await removeTaskData(id, taskId, date);
+        }
         dispatch(alertSuccess());
       } catch (err) {
         dispatch(alertError(err.message));
@@ -78,6 +107,18 @@ export const TaskModal = () => {
             label={'Title'}
             margin="normal"
           />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3} sx={{ mt: 1 }}>
+              <DesktopDatePicker
+                label="Date desktop"
+                inputFormat="DD-MM-YYYY"
+                disablePast={true}
+                value={dateValue}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack>
+          </LocalizationProvider>
           <TextField
             fullWidth
             onChange={(newValue) => {
