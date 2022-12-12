@@ -4,17 +4,19 @@ import { ThemeProvider } from '@emotion/react';
 import { mainTheme } from './themes/mainTheme';
 import { useDispatch } from 'react-redux';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setUser } from './store/slices/userSlice';
 import { setData } from './store/slices/dataSlice';
 import { ref, onValue } from 'firebase/database';
 import { useAuth } from './hooks/useAuth';
 import { db } from './api/firebase';
+import { Spinner } from './components/UI/Spinner/Spinner';
 
 const App = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
   const { id } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -27,6 +29,7 @@ const App = () => {
           })
         );
       }
+      setIsLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,9 +46,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={mainTheme}>
-        <AppRoute />
-      </ThemeProvider>
+      <ThemeProvider theme={mainTheme}>{isLoading ? <Spinner /> : <AppRoute />}</ThemeProvider>
     </BrowserRouter>
   );
 };
