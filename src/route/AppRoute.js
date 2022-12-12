@@ -7,6 +7,7 @@ import { ErrorPage } from '../pages/ErrorPage';
 import { HomePage } from '../pages/HomePage/HomePage';
 import { SignInPage } from '../pages/SignInPage/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage/SignUpPage';
+import { TaskPage } from '../pages/TaskPage/TaskPage';
 import { routePath } from '../utils/routeVariables';
 
 export const AppRoute = () => {
@@ -16,11 +17,8 @@ export const AppRoute = () => {
     <Routes>
       <Route path={routePath.HOME} element={<Layout />}>
         <Route index element={<HomePage />} />
-        {isAuth ? (
-          <Route path={routePath.CALENDAR} element={<CalendarPage />} />
-        ) : (
-          <Route path={routePath.CALENDAR} element={<Navigate to={routePath.HOME} replace />} />
-        )}
+        {isAuth && <Route path={routePath.CALENDAR} element={<CalendarPage />} />}
+        {isAuth && <Route path={`${routePath.CALENDAR}/:id`} element={<TaskPage />} />}
         <Route path={routePath.SIGN_IN} element={<SignInPage />} />
         <Route path={routePath.SIGN_UP} element={<SignUpPage />} />
         <Route path={routePath.ERROR} element={<ErrorPage isNotFound={true} />} />

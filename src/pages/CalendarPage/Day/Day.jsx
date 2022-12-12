@@ -21,7 +21,6 @@ export const Day = ({ day }) => {
   const [isTasks, setIsTasks] = useState(false);
   const [isCompletedTasks, setIsCompletedTasks] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  console.log(date, currentDate);
 
   useEffect(() => {
     if (date === currentDate) {
@@ -79,9 +78,9 @@ export const Day = ({ day }) => {
       </Box>
 
       <Box sx={{ display: 'flex' }}>
-        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'dark' : '#fff' }} />
+        <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'gray' : '#fff' }} />
         <FiberManualRecordIcon
-          sx={{ width: 10, height: 10, color: isCompletedTasks ? 'gray' : '#fff' }}
+          sx={{ width: 10, height: 10, color: isCompletedTasks ? '#d4cdcd' : '#fff' }}
         />
       </Box>
     </Paper>

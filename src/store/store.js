@@ -4,6 +4,7 @@ import dateReducer from './slices/dateSlice';
 import dataReducer from './slices/dataSlice';
 import taskModalReducer from './slices/taskModalSlice';
 import alertReducer from './slices/alertSlice';
+import taskSlice from './slices/taskSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     data: dataReducer,
     taskModalData: taskModalReducer,
     alert: alertReducer,
+    task: taskSlice,
   },
 });

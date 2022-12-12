@@ -15,6 +15,9 @@ import { removeTaskData } from '../../../api/removeTaskData';
 import { selectDate } from '../../../store/slices/dateSlice';
 import { alertError } from '../../../store/slices/alertSlice';
 import { InfoButton } from '../InfoButton/InfoButton';
+import { useNavigate } from 'react-router-dom';
+import { routePath } from '../../../utils/routeVariables';
+import { setTask } from '../../../store/slices/taskSlice';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -22,13 +25,15 @@ export const Task = ({ data }) => {
   const { date } = useSelector(selectDate);
   const { id } = useAuth();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = async () => {
     try {
       await updateTaskData(id, taskId, date, title, description, !isChecked);
       setIsChecked(!isChecked);
     } catch (err) {
-      console.log('task update', err.message);
+      dispatch(alertError(err.message));
+      throw new Error(err.code, err.message);
     }
   };
 
@@ -55,7 +60,17 @@ export const Task = ({ data }) => {
     }
   };
 
-  const handleInfo = () => {};
+  const handleInfo = () => {
+    const task = {
+      title,
+      description,
+      complete: isChecked,
+      taskId: taskId,
+    };
+    console.log(1, task);
+    dispatch(setTask({ task }));
+    navigate(`/${routePath.CALENDAR}/${taskId}`, { replace: true });
+  };
 
   return (
     <Paper

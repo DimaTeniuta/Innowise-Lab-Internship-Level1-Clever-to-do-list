@@ -4,7 +4,7 @@ import Container from '@mui/system/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { routePath } from '../../utils/routeVariables';
 import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
@@ -14,8 +14,10 @@ import { auth } from '../../api/firebase';
 export const Header = () => {
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleExit = () => {
+    navigate(routePath.HOME, { replace: true });
     auth.signOut();
     dispatch(removeUser());
   };

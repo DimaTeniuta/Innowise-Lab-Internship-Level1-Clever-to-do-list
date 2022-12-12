@@ -3,11 +3,11 @@ import { Calendar } from './Calendar/Calendar';
 import { TaskBox } from './TaskBox/TaskBox';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { removeDate } from '../../store/slices/dateSlice';
+import { removeDate, selectDate } from '../../store/slices/dateSlice';
 import { TaskModal } from './TaskModal/TaskModal';
 
 export const CalendarPage = () => {
-  const { date } = useSelector((state) => state.date);
+  const { date } = useSelector(selectDate);
   const [tasks, setTasks] = useState(null);
   const dispatch = useDispatch();
 
