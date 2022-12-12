@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  task: { title: null, description: null, taskId: null, complete: null },
+  task: null,
 };
 
 const taskSlice = createSlice({
@@ -9,7 +9,7 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     setTask(state, action) {
-      state.task = action.payload.task;
+      state.task = action.payload;
     },
     removeTaskData() {
       return initialState;

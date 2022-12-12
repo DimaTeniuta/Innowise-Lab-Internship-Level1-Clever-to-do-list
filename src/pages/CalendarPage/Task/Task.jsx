@@ -1,15 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined';
 import { useState } from 'react';
 import { Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateTaskData } from '../../../api/updateTaskData';
-import { TrashBasket } from '../TrashBasket/TrashBasket';
-import { UpdateButton } from '../UpdateButton/UpadateButton';
+import { TrashBasket } from '../../../components/UI/TrashBasket/TrashBasket';
+import { UpdateButton } from '../../../components/UI/UpdateButton/UpadateButton';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { removeTaskData } from '../../../api/removeTaskData';
 import { selectDate } from '../../../store/slices/dateSlice';
@@ -17,6 +14,7 @@ import { alertError } from '../../../store/slices/alertSlice';
 import { InfoButton } from '../InfoButton/InfoButton';
 import { useNavigate } from 'react-router-dom';
 import { routePath } from '../../../utils/routeVariables';
+import { CheckBox } from '../../../components/UI/CheckBox';
 import { setTask } from '../../../store/slices/taskSlice';
 
 export const Task = ({ data }) => {
@@ -61,15 +59,8 @@ export const Task = ({ data }) => {
   };
 
   const handleInfo = () => {
-    const task = {
-      title,
-      description,
-      complete: isChecked,
-      taskId: taskId,
-    };
-    console.log(1, task);
-    dispatch(setTask({ task }));
-    navigate(`/${routePath.CALENDAR}/${taskId}`, { replace: true });
+    dispatch(setTask({ taskId }));
+    navigate(`/${routePath.CALENDAR}/${date}/${taskId}`);
   };
 
   return (
@@ -90,12 +81,7 @@ export const Task = ({ data }) => {
           p: 1,
         }}
       >
-        <Checkbox
-          icon={<RadioButtonUncheckedOutlinedIcon />}
-          checkedIcon={<CheckCircleOutlinedIcon />}
-          onChange={handleChange}
-          checked={isChecked}
-        />
+        <CheckBox checked={isChecked} onChange={handleChange} />
         <Box>{title}</Box>
         <Box>{description}</Box>
       </Box>
