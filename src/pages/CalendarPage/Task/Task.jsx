@@ -5,17 +5,15 @@ import { Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateTaskData } from '../../../api/updateTaskData';
-import { TrashBasket } from '../../../components/UI/TrashBasket/TrashBasket';
-import { UpdateButton } from '../../../components/UI/UpdateButton/UpadateButton';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { removeTaskData } from '../../../api/removeTaskData';
 import { selectDate } from '../../../store/slices/dateSlice';
 import { alertError } from '../../../store/slices/alertSlice';
-import { InfoButton } from '../InfoButton/InfoButton';
-import { useNavigate } from 'react-router-dom';
-import { routePath } from '../../../utils/routeVariables';
 import { CheckBox } from '../../../components/UI/CheckBox';
-import { setTask } from '../../../store/slices/taskSlice';
+import { openTaskPanel } from '../../../store/slices/taskPanelSlice';
+import { UpdateButton } from '../../../components/UI/UpdateButton';
+import { TrashBasket } from '../../../components/UI/TrashBasket';
+import { InfoButton } from '../../../components/UI/InfoButton';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -23,7 +21,6 @@ export const Task = ({ data }) => {
   const { date } = useSelector(selectDate);
   const { id } = useAuth();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleChange = async () => {
     try {
@@ -59,8 +56,16 @@ export const Task = ({ data }) => {
   };
 
   const handleInfo = () => {
-    dispatch(setTask({ taskId }));
-    navigate(`/${routePath.CALENDAR}/${date}/${taskId}`);
+    const taskPanel = {
+      title,
+      description,
+      complete: isChecked,
+      open: true,
+      taskId: taskId,
+      userId: id,
+      taskDate: date,
+    };
+    dispatch(openTaskPanel({ taskPanel }));
   };
 
   return (

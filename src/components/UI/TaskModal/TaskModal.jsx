@@ -18,6 +18,7 @@ import Stack from '@mui/material/Stack';
 import dayjs from 'dayjs';
 import { transformCalendarDate } from '../../../utils/transformDate';
 import { removeTaskData } from '../../../api/removeTaskData';
+import { closeTaskPanel } from '../../../store/slices/taskPanelSlice';
 
 export const TaskModal = () => {
   const {
@@ -80,6 +81,7 @@ export const TaskModal = () => {
         if (currentDate !== date) {
           await removeTaskData(id, taskId, date);
         }
+        dispatch(closeTaskPanel());
         dispatch(alertSuccess());
       } catch (err) {
         dispatch(alertError(err.message));
