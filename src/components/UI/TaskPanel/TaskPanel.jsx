@@ -23,7 +23,6 @@ export const TaskPanel = () => {
   const handleClose = () => {
     dispatch(closeTaskPanel());
   };
-  console.log(111, title, description, complete, open, taskId, userId, taskDate);
 
   const handleUpdate = () => {
     const taskData = {
