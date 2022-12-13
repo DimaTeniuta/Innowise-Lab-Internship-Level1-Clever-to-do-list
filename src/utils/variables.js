@@ -12,3 +12,5 @@ export const errorAuthText = {
   EMAIL_EXISTS: 'Email already exists',
   GENERAL_TEXT: 'Error',
 };
+
+export const MIN_SCROLL_SIZE = 70;

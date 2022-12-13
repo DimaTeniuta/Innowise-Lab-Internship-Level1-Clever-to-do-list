@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MONTH_LENGTH } from '../utils/variables';
 
-export const useCalendar = (month = 0) => {
+export const useCalendar = (month) => {
   const [calendar, setCalendar] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,8 @@ export const useCalendar = (month = 0) => {
     while (arr.length < MONTH_LENGTH) {
       arr.push(date.setDate(date.getDate() + 1));
     }
-    setCalendar([...arr]);
+    setCalendar([...calendar, ...arr]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month]);
 
   return calendar;
