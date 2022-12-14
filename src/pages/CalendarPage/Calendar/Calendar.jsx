@@ -95,6 +95,7 @@ export const Calendar = () => {
         <Button variant="outlined" onClick={scrollLeft}>
           <KeyboardArrowLeftIcon />
         </Button>
+
         <Button variant="outlined" onClick={scrollRight}>
           <KeyboardArrowRightIcon />
         </Button>

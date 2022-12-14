@@ -11,6 +11,7 @@ export const useCalendar = (month) => {
     while (arr.length < MONTH_LENGTH) {
       arr.push(date.setDate(date.getDate() + 1));
     }
+
     setCalendar([...calendar, ...arr]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month]);

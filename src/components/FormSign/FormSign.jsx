@@ -36,11 +36,11 @@ const err = {
 };
 
 export const FormSign = ({ isSignUp }) => {
-  const [errStack, setErrStack] = useState(err);
-  const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = getAuth();
+  const [errStack, setErrStack] = useState(err);
+  const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {

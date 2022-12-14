@@ -14,14 +14,22 @@ export const AppRoute = () => {
 
   return (
     <Routes>
-      <Route path={routePath.HOME} element={<Layout />}>
-        <Route index element={<HomePage />} />
-        {isAuth && <Route path={routePath.CALENDAR} element={<CalendarPage />} />}
-        <Route path={routePath.SIGN_IN} element={<SignInPage />} />
-        <Route path={routePath.SIGN_UP} element={<SignUpPage />} />
-        <Route path={routePath.ERROR} element={<ErrorPage isNotFound={true} />} />
-        <Route path={routePath.GENERAL} element={<Navigate to={routePath.ERROR} replace />} />
-      </Route>
+      {isAuth ? (
+        <Route path={routePath.HOME} element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path={routePath.CALENDAR} element={<CalendarPage />} />
+          <Route path={routePath.ERROR} element={<ErrorPage isNotFound={true} />} />
+          <Route path={routePath.GENERAL} element={<Navigate to={routePath.ERROR} replace />} />
+        </Route>
+      ) : (
+        <Route path={routePath.HOME} element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path={routePath.SIGN_IN} element={<SignInPage />} />
+          <Route path={routePath.SIGN_UP} element={<SignUpPage />} />
+          <Route path={routePath.ERROR} element={<ErrorPage isNotFound={true} />} />
+          <Route path={routePath.GENERAL} element={<Navigate to={routePath.ERROR} replace />} />
+        </Route>
+      )}
     </Routes>
   );
 };

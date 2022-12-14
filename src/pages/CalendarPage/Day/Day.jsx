@@ -28,14 +28,12 @@ export const Day = ({ day }) => {
     } else {
       setIsActive(false);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
 
   useEffect(() => {
     if (data && Object.prototype.hasOwnProperty.call(data, currentDate)) {
       setIsTasks(true);
-
       const isCompleteTask = Object.values(data[currentDate]).every((task) => !task.complete);
       setIsCompletedTasks(!isCompleteTask);
     } else {
@@ -55,7 +53,7 @@ export const Day = ({ day }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        minWidth: '150px',
+        minWidth: { xs: '110px', sm: '150px' },
         p: 2,
         border: isActive ? '2px solid #ffa726' : '2px solid #fefefe',
         transition: '0.1s',
@@ -73,9 +71,9 @@ export const Day = ({ day }) => {
           justifyContent: 'space-between',
         }}
       >
-        <Box>{month}</Box>
-        <Box sx={{ fontSize: 24 }}>{weekDay}</Box>
-        <Box sx={{ fontSize: 24 }}>{numberDay}</Box>
+        <Box sx={{ fontSize: { xs: 14, sm: 18 } }}>{month}</Box>
+        <Box sx={{ fontSize: { xs: 18, sm: 24 } }}>{weekDay}</Box>
+        <Box sx={{ fontSize: { xs: 18, sm: 24 } }}>{numberDay}</Box>
       </Box>
 
       <Box sx={{ display: 'flex' }}>

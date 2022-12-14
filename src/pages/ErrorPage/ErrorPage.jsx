@@ -27,6 +27,7 @@ export const ErrorPage = ({ isNotFound }) => {
               {'Back to Home'}
             </Button>
           </Grid>
+
           <Grid item>
             <Button
               component={Link}

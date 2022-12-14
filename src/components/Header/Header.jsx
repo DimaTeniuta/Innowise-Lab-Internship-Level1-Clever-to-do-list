@@ -78,8 +78,9 @@ export const Header = () => {
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    color: 'primary.contrastText',
+                    width: { sm: 160 },
                     p: 1,
+                    color: 'primary.contrastText',
                     fontSize: 14,
                     textDecoration: 'none',
                   }}

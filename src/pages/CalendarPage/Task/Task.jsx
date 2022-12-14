@@ -87,10 +87,12 @@ export const Task = ({ data }) => {
         }}
       >
         <CheckBox checked={isChecked} onChange={handleChange} />
+
         <Box sx={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', wordBreak: 'break-word' }}>
           {title}
         </Box>
       </Box>
+
       <Box
         sx={{
           display: 'flex',
@@ -100,7 +102,9 @@ export const Task = ({ data }) => {
         }}
       >
         <InfoButton onAction={handleInfo} />
+
         <UpdateButton onAction={handleUpdate} />
+
         <TrashBasket onAction={handleDelete} />
       </Box>
     </Paper>

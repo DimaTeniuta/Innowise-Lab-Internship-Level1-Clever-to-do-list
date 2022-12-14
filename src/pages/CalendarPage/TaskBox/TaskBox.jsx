@@ -43,9 +43,11 @@ export const TaskBox = () => {
         <Typography variant="h4" component="h4">
           {date}
         </Typography>
+
         <Button onClick={handleOpenTaskModal} variant="contained" sx={{ width: 280 }}>
           Create Task
         </Button>
+
         <Box
           sx={{
             display: 'flex',

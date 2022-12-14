@@ -141,6 +141,7 @@ export const TaskModal = () => {
             label={'Title'}
             margin="normal"
           />
+
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3} sx={{ mt: 1 }}>
               <DesktopDatePicker
@@ -161,6 +162,7 @@ export const TaskModal = () => {
               />
             </Stack>
           </LocalizationProvider>
+
           <TextField
             fullWidth
             onChange={(newValue) => {
@@ -173,6 +175,7 @@ export const TaskModal = () => {
             label={'Description'}
             margin="normal"
           />
+
           <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: 2 }}>
             <LoadingButton
               loading={isLoading}
@@ -184,6 +187,7 @@ export const TaskModal = () => {
             >
               {isCreateType ? 'Create task' : 'Update task'}
             </LoadingButton>
+
             <Button
               type="reset"
               size="large"

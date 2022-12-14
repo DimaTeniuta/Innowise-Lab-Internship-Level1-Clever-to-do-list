@@ -75,10 +75,12 @@ export const TaskPanel = () => {
           >
             <CloseIcon />
           </IconButton>
+
           <Typography sx={{ mb: 2 }}>Title</Typography>
           <Typography variant="h5" component="div" sx={{ mb: 4 }}>
             {title}
           </Typography>
+
           <Typography sx={{ mb: 2 }}>Description</Typography>
           <Typography
             variant="h5"
@@ -95,6 +97,7 @@ export const TaskPanel = () => {
             {description}
           </Typography>
         </CardContent>
+
         <CardActions>
           <UpdateButton onAction={handleUpdate} />
           <TrashBasket onAction={handleDelete} />

@@ -1,16 +1,11 @@
 import React from 'react';
 import { Box, Button, Container } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { routePath } from '../../utils/routeVariables';
 
 export const HomePage = () => {
-  const navigate = useNavigate();
   const { isAuth } = useAuth();
-
-  const handleClick = () => {
-    isAuth ? navigate(`/${routePath.CALENDAR}`) : navigate(`/${routePath.SIGN_IN}`);
-  };
 
   return (
     <Container
@@ -36,6 +31,7 @@ export const HomePage = () => {
 
         <Button
           variant="contained"
+          component={Link}
           sx={{
             width: { xs: 200, sm: 200, md: 200, lg: 250 },
             height: { xs: 50, sm: 50, md: 50, lg: 56 },
@@ -43,7 +39,7 @@ export const HomePage = () => {
             color: 'secondary.main',
             fontSize: { xs: 18, sm: 18, md: 20, lg: 22 },
           }}
-          onClick={handleClick}
+          to={isAuth ? routePath.CALENDAR : routePath.SIGN_IN}
         >
           Get started
         </Button>
