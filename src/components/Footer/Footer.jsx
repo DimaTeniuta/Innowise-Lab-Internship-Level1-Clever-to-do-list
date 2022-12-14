@@ -53,14 +53,22 @@ export const Footer = () => {
                 textDecoration: 'none',
               }}
             >
-              <GitHubIcon color="secondary" sx={{ mr: { xs: 0.5, sm: 1 } }} />
+              <GitHubIcon color="secondary" sx={{ mr: 1 }} />
               <Typography variant="h6" component="span" sx={{ fontSize: 16, mt: 0.1 }}>
                 DimaTeniuta
               </Typography>
             </Link>
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', columnGap: 4 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: { md: 'flex-end', lg: 'flex-end' },
+              columnGap: 4,
+              width: { md: 112, lg: 112 },
+            }}
+          >
             <Typography variant="h6" component="span" sx={{ fontSize: 16 }}>
               &copy; 2022
             </Typography>

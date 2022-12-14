@@ -10,6 +10,11 @@ import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { removeUser } from '../../store/slices/userSlice';
 import { auth } from '../../api/firebase';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export const Header = () => {
   const { isAuth } = useAuth();
@@ -42,6 +47,7 @@ export const Header = () => {
               }}
               to={routePath.HOME}
             >
+              <AssignmentIcon sx={{ mb: 0.5, mr: 1 }} />
               T.Management
             </Button>
           </Box>
@@ -63,7 +69,8 @@ export const Header = () => {
                   }}
                   to={routePath.CALENDAR}
                 >
-                  Calendar
+                  <EventAvailableIcon sx={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+                  <Box sx={{ display: { xs: 'none', sm: 'block' } }}>Calendar</Box>
                 </Button>
               </Box>
               <Box>
@@ -78,7 +85,8 @@ export const Header = () => {
                   }}
                   onClick={handleExit}
                 >
-                  Sign Out
+                  <LogoutIcon sx={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+                  <Box sx={{ display: { xs: 'none', sm: 'block' } }}>Sign Out</Box>
                 </Button>
               </Box>
             </>
@@ -99,7 +107,8 @@ export const Header = () => {
                 }}
                 to={routePath.SIGN_IN}
               >
-                SignIn
+                <LoginIcon x={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>SignIn</Box>
               </Button>
               <Button
                 component={NavLink}
@@ -116,7 +125,8 @@ export const Header = () => {
                 }}
                 to={routePath.SIGN_UP}
               >
-                SignUp
+                <HowToRegIcon x={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>SignUp</Box>
               </Button>
             </Box>
           )}
