@@ -21,18 +21,18 @@ import { removeTaskData } from '../../../api/removeTaskData';
 import { closeTaskPanel } from '../../../store/slices/taskPanelSlice';
 
 export const TaskModal = () => {
+  const dispatch = useDispatch();
   const {
     taskData: { title, description, open, isCreateType, taskId, complete, taskDate },
   } = useSelector(selectTaskModalDate);
-  const [titleValue, setTitleValue] = useState(title);
-  const [descriptionValue, setDescriptionValue] = useState(description);
   const { date } = useSelector(selectDate);
   const { id } = useAuth();
+  const [titleValue, setTitleValue] = useState(title);
+  const [descriptionValue, setDescriptionValue] = useState(description);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
   const [dateValue, setDateValue] = useState(dayjs(new Date()));
 
-  const handleChange = (newValue) => {
+  const handleChangeDate = (newValue) => {
     setDateValue(newValue);
   };
 
@@ -59,8 +59,38 @@ export const TaskModal = () => {
     setDescriptionValue('');
   };
 
+  const validateTitle = () => {
+    if (!titleValue.trim()) {
+      return 'This field is required';
+    }
+    return ' ';
+  };
+
+  const validateDate = () => {
+    const date = transformCalendarDate(dateValue);
+    const reg = /^\d{2}-\d{2}-\d{4}$/i;
+    if (reg.test(date)) {
+      const currentDate = new Date();
+      if (new Date(date.split('-').reverse().join('/')) < currentDate.setHours(0, 0, 0, 0)) {
+        return "The date mustn't be in the past";
+      }
+      return ' ';
+    } else {
+      return 'The date must be in format "DD-MM-YYYY"';
+    }
+  };
+
+  const checkSuccessValidation = () => {
+    const result = validateTitle() + validateDate();
+    return !!result.trim();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (checkSuccessValidation()) {
+      return;
+    }
+
     if (isCreateType) {
       try {
         setIsLoading(true);
@@ -102,6 +132,8 @@ export const TaskModal = () => {
             name={'Title'}
             fullWidth
             autoFocus
+            error={!titleValue.trim()}
+            helperText={validateTitle()}
             onChange={(newValue) => {
               setTitleValue(newValue.target.value);
             }}
@@ -115,9 +147,17 @@ export const TaskModal = () => {
                 label="Date desktop"
                 inputFormat="DD-MM-YYYY"
                 disablePast={true}
+                error={!titleValue.trim()}
+                helperText={validateTitle()}
                 value={dateValue}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
+                onChange={handleChangeDate}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    error={!!validateDate().trim()}
+                    helperText={validateDate()}
+                  />
+                )}
               />
             </Stack>
           </LocalizationProvider>
