@@ -47,8 +47,8 @@ export const Header = () => {
               }}
               to={routePath.HOME}
             >
-              <AssignmentIcon sx={{ mb: 0.5, mr: 1 }} />
-              T.Management
+              <AssignmentIcon sx={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+              <Box sx={{ display: { xs: 'none', sm: 'block' } }}> T.Management</Box>
             </Button>
           </Box>
           {isAuth ? (
