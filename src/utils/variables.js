@@ -14,3 +14,5 @@ export const errorAuthText = {
 };
 
 export const MIN_SCROLL_SIZE = 70;
+export const SCROLL_START_VALUE = 0;
+export const SCROLL_SPEED = 8;

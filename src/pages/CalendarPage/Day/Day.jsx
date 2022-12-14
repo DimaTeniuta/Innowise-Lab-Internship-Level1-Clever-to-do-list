@@ -58,8 +58,9 @@ export const Day = ({ day }) => {
         minWidth: '150px',
         p: 2,
         border: isActive ? '2px solid #ffa726' : '2px solid #fefefe',
+        transition: '0.1s',
         ':hover': {
-          cursor: 'pointer',
+          transform: 'scale(1.1)',
         },
       }}
       onClick={() => sendDate()}
