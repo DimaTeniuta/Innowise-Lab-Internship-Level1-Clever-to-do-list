@@ -1,7 +1,7 @@
 # [Clever to-do list](https://drive.google.com/file/d/18I1PxOxZn2lwm__YeOtMNoWeiXygKwwN/view)
 ___
 
-### [Deploy](https://clever-todo-list.netlify.app/calendar)
+### [Deploy](https://clever-todo-list.netlify.app)
 ___
 ### To start application locally, do this 💻 👇🏻
 
