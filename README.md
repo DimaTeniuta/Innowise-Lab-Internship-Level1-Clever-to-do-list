@@ -21,6 +21,9 @@ password: 12345678
 ```
 ___
 ### Database snapshot
+![image](https://user-images.githubusercontent.com/93836691/207809918-7ee22410-13af-46a7-ab71-9bb8f71f27b3.png)
+![image](https://user-images.githubusercontent.com/93836691/207810103-9be79f7e-a2bf-4d30-8a4b-9bb7894d2db7.png)
+
 ___
 ### Technology Stack 📦
 
