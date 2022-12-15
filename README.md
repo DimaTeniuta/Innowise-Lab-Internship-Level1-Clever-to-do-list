@@ -44,5 +44,64 @@ ___
 [ESLint(react-recommended)](https://eslint.org/) **Static code analyzer, for quick troubleshooting**
 
 [Webpack](https://webpack.js.org/) **A great bundler for putting a project together**
-
+___
+### Folder structure
+```
+├── husky
+│   ├── _
+|   |   ├── .gitignore
+│   │   └── husky.sh
+│   └── pre-commit
+│ 
+├── build (after nmp run build comand)
+├── node_modules
+├── public
+|     ├── index.html
+|     ├── manifest.json
+|     ├── robots.txt
+|     └── images
+|
+├── src
+│   ├── api
+│   ├── components
+|   |      ├── ErrorBoundary
+|   |      ├── Footer
+|   |      ├── FormSign
+|   |      ├── Header
+|   |      ├── Layout
+|   |      └── UI
+|   |           ├── Checkbox
+|   |           ├── InfoButton
+|   |           ├── ModalWindow
+|   |           ├── Notifier
+|   |           ├── Spinner
+|   |           ├── TaskModal
+|   |           ├── TaskPanel
+|   |           ├── TrashBasket
+|   |           └── UpdateButton
+│   ├── hooks
+│   ├── pages
+|   |     ├── CalendarPage
+|   |     ├── ErrorPage
+|   |     ├── HomePage
+|   |     ├── SignInPage
+|   |     └── SignUpPage
+│   ├── route
+│   ├── store
+|   |     ├── slices
+|   |     └── store.js
+│   ├── themes
+│   ├── utils
+│   ├── App.jsx
+│   ├── index.js
+│   ├── index.scss
+│   └── setupTests.js
+├── .env
+├── .eslintrc.json
+├── .gitignore
+├── .prettierrc
+├── package-lock.json
+├── package.json
+└── README.md
+```
 
