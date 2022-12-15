@@ -58,6 +58,7 @@ export const Day = ({ day }) => {
         border: isActive ? '2px solid #ffa726' : '2px solid #fefefe',
         transition: '0.1s',
         ':hover': {
+          cursor: 'pointer',
           transform: 'scale(1.1)',
         },
       }}
