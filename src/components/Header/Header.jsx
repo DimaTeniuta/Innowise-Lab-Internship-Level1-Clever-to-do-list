@@ -108,7 +108,7 @@ export const Header = () => {
                 }}
                 to={routePath.SIGN_IN}
               >
-                <LoginIcon x={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+                <LoginIcon sx={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>SignIn</Box>
               </Button>
               <Button
@@ -126,7 +126,7 @@ export const Header = () => {
                 }}
                 to={routePath.SIGN_UP}
               >
-                <HowToRegIcon x={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
+                <HowToRegIcon sx={{ mb: 0.5, mr: { xs: 0, sm: 1 } }} />
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>SignUp</Box>
               </Button>
             </Box>
