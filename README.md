@@ -57,9 +57,8 @@ ___
 ├── node_modules
 ├── public
 |     ├── index.html
-|     ├── manifest.json
 |     ├── robots.txt
-|     └── images
+|     └── **/*.svg
 |
 ├── src
 │   ├── api
