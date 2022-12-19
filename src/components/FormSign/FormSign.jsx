@@ -18,9 +18,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { alertError, alertSuccess } from '../../store/slices/alertSlice';
 import { convertError } from '../../utils/convertError';
+import { auth } from '../../api/firebase';
 
 const validator = {
   [formFields.LOGIN]: [validateEmail(validateRule.EMAIL)],
@@ -38,7 +39,6 @@ const err = {
 export const FormSign = ({ isSignUp }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const auth = getAuth();
   const [errStack, setErrStack] = useState(err);
   const [isDisabledSubmitBtn, setIsDisabledSubmitBtn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

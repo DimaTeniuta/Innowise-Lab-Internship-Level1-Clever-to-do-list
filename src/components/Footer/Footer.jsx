@@ -49,11 +49,11 @@ export const Footer = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                color: 'secondary.main',
+                color: 'primary.contrastText',
                 textDecoration: 'none',
               }}
             >
-              <GitHubIcon color="secondary" sx={{ mr: 1 }} />
+              <GitHubIcon color="inherit" sx={{ mr: 1 }} />
               <Typography variant="h6" component="span" sx={{ fontSize: 16, mt: 0.1 }}>
                 DimaTeniuta
               </Typography>
@@ -69,7 +69,7 @@ export const Footer = () => {
               width: { md: 112, lg: 112 },
             }}
           >
-            <Typography variant="h6" component="span" sx={{ fontSize: 16 }}>
+            <Typography variant="h6" component="span" sx={{ color: '#000000', fontSize: 16 }}>
               &copy; 2022
             </Typography>
 

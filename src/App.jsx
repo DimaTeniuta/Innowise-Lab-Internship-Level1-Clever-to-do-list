@@ -3,18 +3,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import { mainTheme } from './themes/mainTheme';
 import { useDispatch } from 'react-redux';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { setUser } from './store/slices/userSlice';
 import { setData } from './store/slices/dataSlice';
 import { ref, onValue } from 'firebase/database';
 import { useAuth } from './hooks/useAuth';
-import { db } from './api/firebase';
+import { auth, db } from './api/firebase';
 import { Spinner } from './components/UI/Spinner/Spinner';
 
 const App = () => {
   const dispatch = useDispatch();
-  const auth = getAuth();
   const { id } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
 
