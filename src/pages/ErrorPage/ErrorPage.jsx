@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 
 export const ErrorPage = ({ isNotFound }) => {
   return (
-    <>
+    <main>
       <Container sx={{ pt: 5 }}>
         <Typography
           variant="h3"
@@ -49,6 +49,6 @@ export const ErrorPage = ({ isNotFound }) => {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </main>
   );
 };

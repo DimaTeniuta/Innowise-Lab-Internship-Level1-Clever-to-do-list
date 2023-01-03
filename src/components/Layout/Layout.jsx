@@ -9,9 +9,7 @@ export const Layout = () => {
   return (
     <>
       <Header />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
       <Footer />
       <Notifier />
       <TaskModal />

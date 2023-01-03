@@ -5,10 +5,10 @@ import { TaskBox } from './TaskBox/TaskBox';
 
 export const CalendarPage = () => {
   return (
-    <>
+    <main>
       <Calendar />
       <TaskBox></TaskBox>
       <TaskPanel />
-    </>
+    </main>
   );
 };
