@@ -16,7 +16,7 @@ export const TaskBox = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data[date]) {
+    if (data && Object.prototype.hasOwnProperty.call(data, date)) {
       setTasks(Object.values(data[date]));
     } else {
       setTasks([]);

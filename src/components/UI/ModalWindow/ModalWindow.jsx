@@ -21,7 +21,7 @@ export function ModalWindow(props) {
     <WrapperTheme open={open} onClick={onClose} disableEscapeKeyDown>
       <DialogTitle sx={{ m: 0, p: 2 }} {...other} onClick={handleStopPropagation}>
         {title}
-        {onClose ? (
+        {onClose && (
           <IconButton
             aria-label="close"
             onClick={onClose}
@@ -34,7 +34,7 @@ export function ModalWindow(props) {
           >
             <CloseIcon />
           </IconButton>
-        ) : null}
+        )}
       </DialogTitle>
       <DialogContent sx={{ overflowX: 'hidden' }} onClick={handleStopPropagation}>
         {children}
