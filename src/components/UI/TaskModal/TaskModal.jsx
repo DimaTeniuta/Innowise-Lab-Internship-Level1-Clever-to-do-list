@@ -40,6 +40,10 @@ export const TaskModal = () => {
     setTitleValue(e.target.value);
   };
 
+  const handleChangeDescription = (e) => {
+    setDescriptionValue(e.target.value);
+  };
+
   useEffect(() => {
     if (date) {
       setDateValue(date.split('-').reverse().join(''));
@@ -167,9 +171,7 @@ export const TaskModal = () => {
 
           <TextField
             fullWidth
-            onChange={(newValue) => {
-              setDescriptionValue(newValue.target.value);
-            }}
+            onChange={handleChangeDescription}
             multiline
             minRows={4}
             maxRows={4}
