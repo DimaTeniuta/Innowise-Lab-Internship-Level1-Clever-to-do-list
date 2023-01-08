@@ -56,7 +56,9 @@ export const TaskBox = () => {
             width: '100%',
           }}
         >
-          {tasks.length ? tasks.map((task) => <Task key={task.taskId} data={task} />) : ''}
+          {tasks.map((task) => (
+            <Task key={task.taskId} data={task} />
+          ))}
         </Box>
       </Box>
     </Container>
