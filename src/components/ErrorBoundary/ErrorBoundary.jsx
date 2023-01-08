@@ -8,7 +8,7 @@ export default class ErrorBoundary extends Component {
   }
 
   static getDerivedStateFromError() {
-    this.setState({ hasError: true });
+    return { hasError: true };
   }
 
   render() {
