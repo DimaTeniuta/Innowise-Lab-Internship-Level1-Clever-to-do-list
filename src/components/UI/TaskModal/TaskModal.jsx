@@ -36,6 +36,10 @@ export const TaskModal = () => {
     setDateValue(newValue);
   };
 
+  const handleChangeTitle = (e) => {
+    setTitleValue(e.target.value);
+  };
+
   useEffect(() => {
     if (date) {
       setDateValue(date.split('-').reverse().join(''));
@@ -134,9 +138,7 @@ export const TaskModal = () => {
             autoFocus
             error={!titleValue.trim()}
             helperText={validateTitle()}
-            onChange={(newValue) => {
-              setTitleValue(newValue.target.value);
-            }}
+            onChange={handleChangeTitle}
             value={titleValue}
             label={'Title'}
             margin="normal"
