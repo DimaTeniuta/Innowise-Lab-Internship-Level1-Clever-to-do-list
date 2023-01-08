@@ -28,8 +28,7 @@ export const Day = ({ day }) => {
     } else {
       setIsActive(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, [date, currentDate]);
 
   useEffect(() => {
     if (data && Object.prototype.hasOwnProperty.call(data, currentDate)) {
