@@ -48,6 +48,8 @@ export const TaskPanel = () => {
     }
   };
 
+  const handleStopPropagation = (e) => e.stopPropagation();
+
   return (
     <Drawer anchor="right" open={open} disableEscapeKeyDown onClick={handleClose}>
       <Card
@@ -60,7 +62,7 @@ export const TaskPanel = () => {
           boxShadow: 'none',
           pl: 1,
         }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={handleStopPropagation}
       >
         <CardContent sx={{ mt: 4 }}>
           <IconButton
