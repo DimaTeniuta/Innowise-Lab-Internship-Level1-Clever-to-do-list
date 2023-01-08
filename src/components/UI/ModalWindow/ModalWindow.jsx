@@ -15,9 +15,11 @@ const WrapperTheme = styled(Dialog)(({ theme }) => ({
 export function ModalWindow(props) {
   const { children, onClose, open, title, ...other } = props;
 
+  const handleStopPropagation = (e) => e.stopPropagation();
+
   return (
     <WrapperTheme open={open} onClick={onClose} disableEscapeKeyDown>
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other} onClick={(e) => e.stopPropagation()}>
+      <DialogTitle sx={{ m: 0, p: 2 }} {...other} onClick={handleStopPropagation}>
         {title}
         {onClose ? (
           <IconButton
@@ -34,7 +36,7 @@ export function ModalWindow(props) {
           </IconButton>
         ) : null}
       </DialogTitle>
-      <DialogContent sx={{ overflowX: 'hidden' }} onClick={(e) => e.stopPropagation()}>
+      <DialogContent sx={{ overflowX: 'hidden' }} onClick={handleStopPropagation}>
         {children}
       </DialogContent>
     </WrapperTheme>
