@@ -15,7 +15,7 @@ export const HeaderLink = styled(Button)(({ theme }) => ({
 export const HeaderButton = styled(Button)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  p: 1,
+  padding: 1,
   color: theme.palette.primary.contrastText,
   fontSize: 14,
   textDecoration: 'none',
