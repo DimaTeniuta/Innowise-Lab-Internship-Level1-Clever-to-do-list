@@ -22,6 +22,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 import { alertError, alertSuccess } from '../../store/slices/alertSlice';
 import { convertError } from '../../utils/convertError';
 import { auth } from '../../api/firebase';
+import classes from './formSign.module.scss';
 
 const validator = {
   [formFields.LOGIN]: [validateEmail(validateRule.EMAIL)],
@@ -92,7 +93,7 @@ export const FormSign = ({ isSignUp }) => {
   };
 
   return (
-    <main style={{ display: 'flex', alignItems: 'center' }}>
+    <main className={classes.main}>
       <Container maxWidth="xl" sx={{ height: '100%', pb: 2 }}>
         <Grid container direction="row" justifyContent="center" alignItems="center">
           <Grid item xl={4}>
