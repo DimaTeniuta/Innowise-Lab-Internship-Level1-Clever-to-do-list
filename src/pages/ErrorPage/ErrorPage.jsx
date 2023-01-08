@@ -7,6 +7,11 @@ import { routePath } from '../../utils/routeVariables';
 import Link from '@mui/material/Link';
 
 export const ErrorPage = ({ isNotFound }) => {
+  const refresh = (e) => {
+    e.preventDefault();
+    window.location.reload();
+  };
+
   return (
     <main>
       <Container sx={{ pt: 5 }}>
@@ -29,15 +34,7 @@ export const ErrorPage = ({ isNotFound }) => {
           </Grid>
 
           <Grid item>
-            <Button
-              component={Link}
-              variant="contained"
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.reload();
-              }}
-            >
+            <Button component={Link} variant="contained" href="#" onClick={refresh}>
               {'Refresh page'}
             </Button>
           </Grid>

@@ -61,7 +61,7 @@ export const Day = ({ day }) => {
           transform: 'scale(1.1)',
         },
       }}
-      onClick={() => sendDate()}
+      onClick={sendDate}
     >
       <Box
         sx={{
