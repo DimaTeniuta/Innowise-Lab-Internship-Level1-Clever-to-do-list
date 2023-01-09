@@ -1,7 +1,5 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import { useState } from 'react';
-import { Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateTaskData } from '../../../api/updateTaskData';
@@ -14,6 +12,7 @@ import { openTaskPanel } from '../../../store/slices/taskPanelSlice';
 import { UpdateButton } from '../../../components/UI/UpdateButton';
 import { TrashBasket } from '../../../components/UI/TrashBasket';
 import { InfoButton } from '../../../components/UI/InfoButton';
+import { PaperTask, TitleTask, WrapperBtnTask, WrapperCheckboxTask } from './task.styles';
 
 export const Task = ({ data }) => {
   const { title, description, complete, taskId } = data;
@@ -69,44 +68,18 @@ export const Task = ({ data }) => {
   };
 
   return (
-    <Paper
-      variant="3"
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'column', md: 'row' },
-        justifyContent: 'space-between',
-        backgroundColor: 'rgba(242, 236, 220, 0.3)',
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          columnGap: 2,
-          p: 1,
-        }}
-      >
+    <PaperTask variant="3">
+      <WrapperCheckboxTask>
         <CheckBox checked={isChecked} onChange={handleChange} />
 
-        <Box sx={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', wordBreak: 'break-word' }}>
-          {title}
-        </Box>
-      </Box>
+        <TitleTask>{title}</TitleTask>
+      </WrapperCheckboxTask>
 
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: { xs: 'end', sm: 'end' },
-          columnGap: 2,
-        }}
-      >
+      <WrapperBtnTask>
         <InfoButton onAction={handleInfo} />
-
         <UpdateButton onAction={handleUpdate} />
-
         <TrashBasket onAction={handleDelete} />
-      </Box>
-    </Paper>
+      </WrapperBtnTask>
+    </PaperTask>
   );
 };

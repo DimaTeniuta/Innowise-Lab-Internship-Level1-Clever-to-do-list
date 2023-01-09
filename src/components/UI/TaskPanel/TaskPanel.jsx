@@ -1,10 +1,8 @@
 import React from 'react';
 import Drawer from '@mui/material/Drawer';
 import CloseIcon from '@mui/icons-material/Close';
-import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { closeTaskPanel, selectTaskPanel } from '../../../store/slices/taskPanelSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +11,11 @@ import { TrashBasket } from '../TrashBasket/TrashBasket';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { removeTaskData } from '../../../api/removeTaskData';
 import { alertError } from '../../../store/slices/alertSlice';
+import {
+  CardTaskPanel,
+  IconButtonTaskPanel,
+  TypographyDescriptionTaskPanel,
+} from './taskPanel.styles';
 
 export const TaskPanel = () => {
   const {
@@ -52,31 +55,11 @@ export const TaskPanel = () => {
 
   return (
     <Drawer anchor="right" open={open} disableEscapeKeyDown onClick={handleClose}>
-      <Card
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          width: { xs: 300, lg: 600 },
-          minHeight: '100vh',
-          boxShadow: 'none',
-          pl: 1,
-        }}
-        onClick={handleStopPropagation}
-      >
+      <CardTaskPanel onClick={handleStopPropagation}>
         <CardContent sx={{ mt: 4 }}>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: 'absolute',
-              right: { xs: 10, md: 20 },
-              top: { xs: 10, md: 20 },
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
+          <IconButtonTaskPanel aria-label="close" onClick={handleClose}>
             <CloseIcon />
-          </IconButton>
+          </IconButtonTaskPanel>
 
           <Typography sx={{ mb: 2 }}>Title</Typography>
           <Typography variant="h5" component="div" sx={{ mb: 4 }}>
@@ -84,27 +67,16 @@ export const TaskPanel = () => {
           </Typography>
 
           <Typography sx={{ mb: 2 }}>Description</Typography>
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{
-              mb: 4,
-              maxHeight: '50vh',
-              overflowY: 'auto',
-              whiteSpace: 'pre-wrap',
-              wordWrap: 'break-word',
-              wordBreak: 'break-word',
-            }}
-          >
+          <TypographyDescriptionTaskPanel variant="h5" component="div">
             {description}
-          </Typography>
+          </TypographyDescriptionTaskPanel>
         </CardContent>
 
         <CardActions>
           <UpdateButton onAction={handleUpdate} />
           <TrashBasket onAction={handleDelete} />
         </CardActions>
-      </Card>
+      </CardTaskPanel>
     </Drawer>
   );
 };

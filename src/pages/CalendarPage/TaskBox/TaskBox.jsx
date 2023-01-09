@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Container, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +7,7 @@ import { Task } from '../Task/Task';
 import { setTaskData } from '../../../store/slices/taskModalSlice';
 import { selectData } from '../../../store/slices/dataSlice';
 import { selectDate } from '../../../store/slices/dateSlice';
+import { WrapperForTasksTaskBox, WrapperTaskBox } from './taskBox.styles';
 
 export const TaskBox = () => {
   const { date } = useSelector(selectDate);
@@ -39,7 +39,7 @@ export const TaskBox = () => {
 
   return (
     <Container maxWidth="xl" sx={{ py: 2 }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 2 }}>
+      <WrapperTaskBox>
         <Typography variant="h4" component="h4">
           {date}
         </Typography>
@@ -48,19 +48,12 @@ export const TaskBox = () => {
           Create Task
         </Button>
 
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            rowGap: 1,
-            width: '100%',
-          }}
-        >
+        <WrapperForTasksTaskBox>
           {tasks.map((task) => (
             <Task key={task.taskId} data={task} />
           ))}
-        </Box>
-      </Box>
+        </WrapperForTasksTaskBox>
+      </WrapperTaskBox>
     </Container>
   );
 };

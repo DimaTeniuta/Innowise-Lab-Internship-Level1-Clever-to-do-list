@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { getWordDay } from '../../../utils/getWordDay';
-import Paper from '@mui/material/Paper';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, setDate } from '../../../store/slices/dateSlice';
@@ -9,6 +8,7 @@ import { transformDate } from '../../../utils/transformDate';
 import { useEffect } from 'react';
 import { getMonth } from '../../../utils/getMonth';
 import { selectData } from '../../../store/slices/dataSlice';
+import { DivDay, MonthDivDay, PaperDay, WrapperDay } from './day.styles';
 
 export const Day = ({ day }) => {
   const numberDay = new Date(day).getDate();
@@ -45,36 +45,12 @@ export const Day = ({ day }) => {
   };
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        minWidth: { xs: '110px', sm: '150px' },
-        p: 2,
-        border: isActive ? '2px solid #ffa726' : '2px solid #fefefe',
-        transition: '0.1s',
-        ':hover': {
-          cursor: 'pointer',
-          transform: 'scale(1.1)',
-        },
-      }}
-      onClick={sendDate}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box sx={{ fontSize: { xs: 14, sm: 18 } }}>{month}</Box>
-        <Box sx={{ fontSize: { xs: 18, sm: 24 } }}>{weekDay}</Box>
-        <Box sx={{ fontSize: { xs: 18, sm: 24 } }}>{numberDay}</Box>
-      </Box>
+    <PaperDay elevation={3} active={isActive.toString()} onClick={sendDate}>
+      <WrapperDay>
+        <MonthDivDay>{month}</MonthDivDay>
+        <DivDay>{weekDay}</DivDay>
+        <DivDay>{numberDay}</DivDay>
+      </WrapperDay>
 
       <Box sx={{ display: 'flex' }}>
         <FiberManualRecordIcon sx={{ width: 10, height: 10, color: isTasks ? 'gray' : '#fff' }} />
@@ -82,6 +58,6 @@ export const Day = ({ day }) => {
           sx={{ width: 10, height: 10, color: isCompletedTasks ? '#d4cdcd' : '#fff' }}
         />
       </Box>
-    </Paper>
+    </PaperDay>
   );
 };

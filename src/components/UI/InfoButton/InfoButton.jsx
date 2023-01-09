@@ -1,21 +1,11 @@
-import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { InfoIconButton } from './infoButton.styles';
 
 export const InfoButton = ({ onAction }) => {
   return (
-    <IconButton
-      onClick={onAction}
-      sx={{
-        color: 'gray',
-        ':hover': {
-          color: 'primary.main',
-          backgroundColor: '#e8d8b0',
-        },
-        transition: '0.3s',
-      }}
-    >
+    <InfoIconButton onClick={onAction}>
       <InfoOutlinedIcon />
-    </IconButton>
+    </InfoIconButton>
   );
 };

@@ -4,7 +4,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import CloseIcon from '@mui/icons-material/Close';
 import React from 'react';
-import { IconButton } from '@mui/material';
+import { IconButtonModalWindow } from './modalWindow.styles';
 
 const WrapperTheme = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -22,18 +22,9 @@ export function ModalWindow(props) {
       <DialogTitle sx={{ m: 0, p: 2 }} {...other} onClick={handleStopPropagation}>
         {title}
         {onClose && (
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
+          <IconButtonModalWindow aria-label="close" onClick={onClose}>
             <CloseIcon />
-          </IconButton>
+          </IconButtonModalWindow>
         )}
       </DialogTitle>
       <DialogContent sx={{ overflowX: 'hidden' }} onClick={handleStopPropagation}>

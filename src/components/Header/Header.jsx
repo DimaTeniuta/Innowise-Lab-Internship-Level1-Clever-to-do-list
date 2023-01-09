@@ -14,7 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import { HeaderLink, HeaderButton, TextButton } from './header.styles.ts';
+import { HeaderLink, HeaderButton, TextButton } from './header.styles';
 
 export const Header = () => {
   const { isAuth } = useAuth();

@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { WrapperFooter, LinkGitHub, WrapperYear, WrapperLinkGitHub } from './footer.styles.ts';
+import { WrapperFooter, LinkGitHub, WrapperYear, WrapperLinkGitHub } from './footer.styles';
 
 export const Footer = () => {
   return (

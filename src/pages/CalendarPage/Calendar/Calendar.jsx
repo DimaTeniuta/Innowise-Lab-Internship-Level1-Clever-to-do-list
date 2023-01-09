@@ -1,7 +1,6 @@
-import { Button, Container } from '@mui/material';
+import { Button } from '@mui/material';
 import React from 'react';
 import { Day } from '../Day/Day';
-import Box from '@mui/material/Box';
 import { useCalendar } from '../../../hooks/useCalendar';
 import { useRef } from 'react';
 import { useEffect } from 'react';
@@ -9,6 +8,7 @@ import { useState } from 'react';
 import { MIN_SCROLL_SIZE, SCROLL_SPEED, SCROLL_START_VALUE } from '../../../utils/variables';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { ButtonWrapperCalendar, ContainerCalendar, WrapperCalendar } from './calendar.styles';
 
 export const Calendar = () => {
   const [dayCalendarCount, setDayCalendarCount] = useState(0);
@@ -64,34 +64,14 @@ export const Calendar = () => {
   }, []);
 
   return (
-    <Container
-      maxWidth="xl"
-      sx={{ display: 'flex', flexDirection: 'column', rowGap: 2, overflowX: 'hidden', pt: 3 }}
-    >
-      <Box
-        ref={calendarRef}
-        sx={{
-          display: 'flex',
-          flexWrap: 'nowrap',
-          columnGap: 2,
-          p: 2,
-          overflowX: 'scroll',
-          scrollbarWidth: 'none',
-          '::-webkit-scrollbar': {
-            width: 0,
-            height: 0,
-          },
-          ':hover': {
-            cursor: 'e-resize',
-          },
-        }}
-      >
+    <ContainerCalendar maxWidth="xl">
+      <WrapperCalendar ref={calendarRef}>
         {calendar.map((day) => (
           <Day key={day} day={day} const />
         ))}
-      </Box>
+      </WrapperCalendar>
 
-      <Box sx={{ display: 'flex', columnGap: 1, justifyContent: 'center' }}>
+      <ButtonWrapperCalendar>
         <Button variant="outlined" onClick={scrollLeft}>
           <KeyboardArrowLeftIcon />
         </Button>
@@ -99,7 +79,7 @@ export const Calendar = () => {
         <Button variant="outlined" onClick={scrollRight}>
           <KeyboardArrowRightIcon />
         </Button>
-      </Box>
-    </Container>
+      </ButtonWrapperCalendar>
+    </ContainerCalendar>
   );
 };
